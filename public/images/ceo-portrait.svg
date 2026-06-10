@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1f2a3d"/>
+      <stop offset="60%" stop-color="#0e1320"/>
+      <stop offset="100%" stop-color="#070a14"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="60%">
+      <stop offset="0%" stop-color="#4a7bff" stop-opacity="0.35"/>
+      <stop offset="60%" stop-color="#4a7bff" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="400" height="500" fill="url(#bg)"/>
+  <rect width="400" height="500" fill="url(#glow)"/>
+  <!-- Subtle portrait silhouette -->
+  <g transform="translate(200 270)" fill="#0b1020" stroke="#2a3550" stroke-width="1.5">
+    <ellipse cx="0" cy="-60" rx="60" ry="68"/>
+    <path d="M-110 230 C -110 110 -60 50 0 50 C 60 50 110 110 110 230 Z"/>
+  </g>
+  <g font-family="Inter, system-ui, sans-serif" fill="#7a86a0" text-anchor="middle">
+    <text x="200" y="450" font-size="11" letter-spacing="3" font-weight="600">CORPSC</text>
+    <text x="200" y="470" font-size="10" opacity="0.7">Replace with /public/images/ceo-portrait.jpg</text>
+  </g>
+</svg>

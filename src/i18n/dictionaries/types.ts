@@ -1,0 +1,88 @@
+export interface Dictionary {
+  meta: { title: string; description: string };
+  nav: {
+    about: string;
+    services: string;
+    projects: string;
+    leadership: string;
+    stack: string;
+    contact: string;
+    cta: string;
+    theme: { light: string; dark: string };
+  };
+  hero: {
+    eyebrow: string;
+    title: string;
+    titleAccent: string;
+    subtitle: string;
+    primaryCta: string;
+    secondaryCta: string;
+    stats: ReadonlyArray<{ value: string; label: string }>;
+  };
+  about: {
+    eyebrow: string;
+    title: string;
+    body: ReadonlyArray<string>;
+    pillars: ReadonlyArray<{ title: string; body: string }>;
+  };
+  services: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    items: ReadonlyArray<{
+      title: string;
+      body: string;
+      bullets: ReadonlyArray<string>;
+    }>;
+  };
+  projects: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    ownTab: string;
+    clientTab: string;
+    visit: string;
+    stackLabel: string;
+  };
+  leadership: {
+    eyebrow: string;
+    title: string;
+    name: string;
+    role: string;
+    bio: ReadonlyArray<string>;
+    quote: string;
+    contactLabel: string;
+  };
+  stack: {
+    eyebrow: string;
+    title: string;
+    groups: ReadonlyArray<{ label: string; items: ReadonlyArray<string> }>;
+  };
+  contact: {
+    eyebrow: string;
+    title: string;
+    subtitle: string;
+    fields: {
+      name: string;
+      email: string;
+      company: string;
+      message: string;
+      submit: string;
+    };
+    direct: {
+      emailLabel: string;
+      phoneLabel: string;
+      locationLabel: string;
+      locationValue: string;
+    };
+  };
+  footer: {
+    tagline: string;
+    rights: string;
+    sections: {
+      product: string;
+      links: string;
+      contact: string;
+    };
+  };
+}
