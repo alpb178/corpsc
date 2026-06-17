@@ -29,6 +29,7 @@ export async function generateMetadata({
       languages: {
         es: "/es",
         en: "/en",
+        "x-default": "/es",
       },
     },
     openGraph: {
@@ -57,13 +58,47 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
 
+  const dict = getDictionary(locale);
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    name: "CORPSC",
+    url: `https://www.corpsc.com/${locale}`,
+    logo: "https://www.corpsc.com/images/logo.png",
+    image: "https://www.corpsc.com/images/logo.png",
+    description: dict.meta.description,
+    email: "alpb17.08@gmail.com",
+    telephone: "+59173655692",
+    serviceType: "Custom software development",
+    areaServed: ["BO", "Latin America", "Europe"],
+    knowsLanguage: ["es", "en"],
+    founder: {
+      "@type": "Person",
+      name: "Alejandro Pérez",
+      jobTitle: "Founder & CEO",
+      sameAs: "https://www.linkedin.com/in/alpb1708/",
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Santa Cruz de la Sierra",
+      addressCountry: "BO",
+    },
+  };
+
   return (
     <html lang={locale} className={inter.variable} suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
       </head>
       <body className="bg-surface text-fg antialiased font-sans">
+        <a href="#main" className="skip-link">
+          {dict.nav.skip}
+        </a>
         <ThemeProvider>{children}</ThemeProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </body>
     </html>
   );
