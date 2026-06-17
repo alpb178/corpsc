@@ -2,9 +2,9 @@ import type { Dictionary } from "./types";
 
 const dict: Dictionary = {
   meta: {
-    title: "CORPSC — Software Development Studio",
+    title: "Desarrollo de software a medida en Bolivia | CORPSC",
     description:
-      "CORPSC es un estudio de desarrollo de software con base en Santa Cruz de la Sierra, Bolivia. Construimos plataformas web y móviles para clientes en Bolivia, Latinoamérica y Europa con React, TypeScript, Strapi y desarrollo asistido por IA.",
+      "Estudio de desarrollo de software en Santa Cruz, Bolivia. Construimos plataformas web, apps y APIs a medida para clientes en LATAM y Europa. Hablemos.",
   },
   nav: {
     about: "Nosotros",
@@ -14,47 +14,49 @@ const dict: Dictionary = {
     stack: "Stack",
     contact: "Contacto",
     cta: "Hablemos",
+    menu: "Menú",
+    skip: "Saltar al contenido",
     theme: { light: "Cambiar a modo claro", dark: "Cambiar a modo oscuro" },
   },
   hero: {
     eyebrow: "Estudio de desarrollo de software",
-    title: "Construimos producto digital",
-    titleAccent: "con IA en el flujo de trabajo.",
+    title: "Desarrollamos software a medida",
+    titleAccent: "de extremo a extremo.",
     subtitle:
-      "Estudio con base en Santa Cruz de la Sierra, Bolivia, entregando plataformas web y móviles a medida para clientes en Bolivia, Latinoamérica y Europa. Más de 15 proyectos en producción, arquitectura headless y un equipo nativo en herramientas de IA.",
+      "Estudio con base en Santa Cruz de la Sierra, Bolivia, diseñando y construyendo plataformas web, aplicaciones móviles, APIs y SaaS multi-inquilino para clientes en Bolivia, Latinoamérica y Europa. Más de 20 proyectos en producción, ingeniería full-stack en múltiples stacks y cobertura de pruebas E2E.",
     primaryCta: "Iniciar un proyecto",
     secondaryCta: "Ver proyectos",
     stats: [
-      { value: "9+", label: "años entregando producto" },
-      { value: "15+", label: "proyectos en producción" },
-      { value: "~60%", label: "menos tiempo de entrega con IA" },
+      { value: "9+", label: "años desarrollando software" },
+      { value: "20+", label: "proyectos en producción" },
+      { value: "10+", label: "tecnologías y stacks" },
       { value: "3", label: "países de operación" },
     ],
   },
   about: {
     eyebrow: "Sobre CORPSC",
-    title: "Un estudio enfocado en ingeniería de producto.",
+    title: "Un estudio de ingeniería de software de extremo a extremo.",
     body: [
-      "CORPSC es un estudio de desarrollo con base en Santa Cruz de la Sierra, Bolivia. Operamos para empresas locales y, de forma 100% remota, también para clientes en Latinoamérica, España y la Unión Europea.",
-      "Diseñamos y construimos aplicaciones web y móviles de extremo a extremo: arquitectura, frontend, backend headless, testing E2E y despliegue. Adoptamos herramientas de IA generativa (Claude, Cursor) como parte del proceso, no como un experimento.",
-      "Nuestra prioridad es entregar producto en producción, mantenible y con cobertura de pruebas — no demos.",
+      "CORPSC es un estudio de desarrollo de software con base en Santa Cruz de la Sierra, Bolivia. Operamos para empresas locales y, de forma 100% remota, también para clientes en Latinoamérica, España y la Unión Europea.",
+      "Diseñamos y construimos aplicaciones web, móviles y APIs de extremo a extremo: arquitectura, frontend, backend, bases de datos, testing E2E y despliegue. Trabajamos con múltiples stacks — React/Next y Vue en el frontend; Node, Django, Symfony, Laravel y Python en el backend — eligiendo la herramienta según lo que cada producto necesita.",
+      "Nuestra prioridad es entregar software en producción, mantenible y con cobertura de pruebas — no demos. Usamos IA generativa (Claude, Cursor) como acelerador del proceso, sin que sustituya la ingeniería.",
     ],
     pillars: [
       {
-        title: "Producto en producción",
-        body: "Operamos 3 SaaS propios y más de 12 plataformas para clientes. Sabemos lo que cuesta mantener algo vivo.",
+        title: "Software en producción",
+        body: "Operamos 7 productos propios y 13 plataformas para clientes. Sabemos lo que cuesta mantener software vivo.",
       },
       {
-        title: "Arquitectura headless",
-        body: "React y Next.js sobre Strapi CMS para separar contenido de presentación y escalar sin reescribir.",
+        title: "Ingeniería full-stack",
+        body: "Frontend, backend, APIs y bases de datos en varios stacks: React, Vue, Node, Django, Symfony, Laravel y Python.",
+      },
+      {
+        title: "Arquitectura escalable",
+        body: "Diseños headless, multi-inquilino y orientados a APIs (REST / GraphQL) para crecer sin reescribir.",
       },
       {
         title: "Calidad con E2E",
-        body: "Pipelines automatizados con Playwright y Cypress para reducir regresiones después del despliegue.",
-      },
-      {
-        title: "IA en el flujo diario",
-        body: "Claude AI + Cursor IDE integrados para reducir tiempos de entrega ~60% manteniendo calidad de código.",
+        body: "Pipelines automatizados con Playwright, Cypress y pytest para reducir regresiones después del despliegue.",
       },
     ],
   },
@@ -111,13 +113,14 @@ const dict: Dictionary = {
     title: "Conoce al fundador.",
     name: "Alejandro Pérez",
     role: "Fundador y CEO · Ingeniero Informático",
+    photoAlt: "Alejandro Pérez, Fundador y CEO de CORPSC",
     bio: [
-      "Ingeniero Informático graduado de la Universidad Tecnológica de La Habana (CUJAE) con más de 9 años entregando aplicaciones web y móviles a clientes internacionales.",
-      "Especialista en React.js, TypeScript y arquitecturas headless con Strapi. Adoptante temprano de IA generativa en el flujo de desarrollo, reduciendo tiempos de entrega estimados en ~60% sin comprometer calidad.",
-      "Además de liderar CORPSC, opera personalmente tres productos SaaS en producción y mantiene dos aplicaciones React Native publicadas en Google Play.",
+      "Ingeniero Informático graduado de la Universidad Tecnológica de La Habana (CUJAE) con más de 9 años desarrollando aplicaciones web, móviles y APIs para clientes internacionales.",
+      "Desarrollador full-stack con dominio de React.js, TypeScript y Vue en el frontend, y de Node.js, Django, Symfony, Laravel y Python en el backend, sobre arquitecturas headless y multi-inquilino.",
+      "Además de liderar CORPSC, opera personalmente varios productos SaaS en producción y mantiene aplicaciones React Native publicadas en Google Play.",
     ],
     quote:
-      "No vendemos demos. Vendemos producto vivo, con tests y soporte. La IA hace que entreguemos más rápido — pero la responsabilidad por el código sigue siendo humana.",
+      "No vendemos demos. Vendemos software vivo, con pruebas y soporte. La ingeniería sólida es lo primero; la IA solo nos hace más rápidos.",
     contactLabel: "Hablar con Alejandro",
   },
   stack: {
@@ -126,13 +129,16 @@ const dict: Dictionary = {
     groups: [
       {
         label: "Frontend",
-        items: ["React.js", "Next.js", "TypeScript", "Vue.js", "Tailwind", "HTML5 / CSS3"],
+        items: ["React.js", "Next.js", "TypeScript", "Vue.js", "Tailwind", "Vite", "Livewire", "HTML5 / CSS3"],
       },
       { label: "Móvil", items: ["React Native", "Android Studio", "Java", "Kotlin"] },
-      { label: "Backend & CMS", items: ["Strapi (headless)", "Node.js", "Symfony", "Ruby on Rails", "PHP / Yii"] },
-      { label: "Testing & QA", items: ["Playwright", "Cypress", "Jest", "CI/CD E2E"] },
+      { label: "Backend & CMS", items: ["Strapi (headless)", "Node.js", "Symfony + API Platform", "Laravel + Nova", "Ruby on Rails", "PHP / Yii"] },
+      { label: "Python & automatización", items: ["Django / DRF", "FastAPI", "Celery", "Pandas", "CCXT", "Streamlit", "PyQt5"] },
+      { label: "APIs & mensajería", items: ["GraphQL", "REST API", "WebSockets / Channels", "RabbitMQ"] },
+      { label: "Testing & QA", items: ["Playwright", "Cypress", "Jest", "pytest", "CI/CD E2E"] },
       { label: "IA & Dev Tools", items: ["Claude AI", "Cursor IDE", "Prompt Engineering", "Git · GitHub"] },
-      { label: "Bases de datos", items: ["PostgreSQL", "MySQL", "MongoDB", "SQLite"] },
+      { label: "Bases de datos & búsqueda", items: ["PostgreSQL", "MySQL", "MongoDB", "Elasticsearch", "Algolia", "SQLite"] },
+      { label: "Cloud & integraciones", items: ["AWS", "Firebase", "Telegram Bot", "TON", "WhatsApp Gateway"] },
     ],
   },
   contact: {
@@ -147,6 +153,10 @@ const dict: Dictionary = {
       message: "Mensaje",
       submit: "Enviar mensaje",
     },
+    whatsappCta: "Enviar por WhatsApp",
+    success:
+      "Abrimos tu app de correo con el mensaje listo — solo pulsa enviar. Si no se abrió, escríbenos por WhatsApp o a nuestro email.",
+    emailSubject: "Nuevo contacto desde corpsc.com",
     direct: {
       emailLabel: "Email",
       phoneLabel: "Teléfono / WhatsApp",
@@ -155,7 +165,7 @@ const dict: Dictionary = {
     },
   },
   footer: {
-    tagline: "Estudio de software · React · TypeScript · IA aplicada.",
+    tagline: "Estudio de desarrollo de software · Web · Móvil · APIs · Full-stack.",
     rights: "Todos los derechos reservados.",
     sections: {
       product: "Compañía",

@@ -37,9 +37,7 @@ export default function Footer({ dict, locale }: { dict: Dict; locale: Locale })
 
         <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-line pt-6 text-xs text-fg-faint sm:flex-row sm:items-center">
           <span>© {year} CORPSC. {dict.footer.rights}</span>
-          <span>
-            Crafted with React · Next.js · Tailwind · Claude AI
-          </span>
+          <span>{dict.contact.direct.locationValue}</span>
         </div>
       </div>
     </footer>
