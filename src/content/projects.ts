@@ -1,9 +1,19 @@
 export type ProjectKind = "own" | "client";
 
+export type ProjectLinkKind = "web" | "android" | "ios";
+
+export interface ProjectLink {
+  kind: ProjectLinkKind;
+  url: string;
+}
+
 export interface Project {
   slug: string;
   name: string;
-  url: string;
+  /** Primary public URL (web). Omit for apps that live only in app stores. */
+  url?: string;
+  /** Extra platform/store links (Google Play, App Store) shown as buttons. */
+  links?: ProjectLink[];
   kind: ProjectKind;
   category: { es: string; en: string };
   summary: { es: string; en: string };
@@ -88,16 +98,16 @@ export const projects: Project[] = [
     stack: ["React.js"],
   },
   {
-    slug: "pop",
-    name: "POP",
-    url: "https://pop.corpsc.com",
+    slug: "dandomuela",
+    name: "Dando Muela",
+    url: "https://dandomuela.com",
     kind: "own",
-    category: { es: "Producto interno", en: "Internal product" },
+    category: { es: "Citas & conectividad", en: "Dating & connectivity" },
     summary: {
-      es: "Producto interno de CORPSC para flujos de operación.",
-      en: "Internal CORPSC product for operations workflows.",
+      es: "Ecosistema multiplataforma web y móvil con API de autenticación segura y bot de Telegram con pasarela de pagos integrada en la red TON.",
+      en: "Cross-platform web and mobile ecosystem with a secure auth API and a Telegram bot with TON-network payments built in.",
     },
-    stack: ["React.js"],
+    stack: ["Laravel", "Sanctum", "Socialite", "FastAPI", "Python", "Telegram Bot", "TON"],
   },
 
   // ── Client work ────────────────────────────────────────────────────
@@ -141,27 +151,48 @@ export const projects: Project[] = [
   },
   {
     slug: "tikneo-golf",
-    name: "Tikneo Golf (mobile)",
-    url: "https://play.google.com/store/search?q=tikneo%20golf",
+    name: "Tikneo Golf",
     kind: "client",
-    category: { es: "App móvil · Google Play", en: "Mobile app · Google Play" },
+    category: { es: "App móvil · Android", en: "Mobile app · Android" },
     summary: {
-      es: "App móvil publicada en Google Play para la gestión de rondas de golf.",
-      en: "Mobile app published on Google Play for managing golf rounds.",
+      es: "App móvil para la gestión de rondas de golf, publicada en Google Play.",
+      en: "Mobile app for managing golf rounds, published on Google Play.",
     },
+    links: [
+      { kind: "android", url: "https://play.google.com/store/apps/details?id=com.tikneo.golf" },
+    ],
     stack: ["React Native", "Android"],
   },
   {
     slug: "tikneo-social",
-    name: "Tikneo Social (mobile)",
-    url: "https://play.google.com/store/search?q=tikneo%20social",
+    name: "Tikneo (mobile)",
     kind: "client",
-    category: { es: "App móvil · Google Play", en: "Mobile app · Google Play" },
+    category: { es: "App móvil · iOS & Android", en: "Mobile app · iOS & Android" },
     summary: {
-      es: "App social para comunidades deportivas, publicada en Google Play.",
-      en: "Social app for sports communities, published on Google Play.",
+      es: "App social para comunidades deportivas, publicada en App Store y Google Play.",
+      en: "Social app for sports communities, published on the App Store and Google Play.",
     },
-    stack: ["React Native", "Android"],
+    links: [
+      { kind: "ios", url: "https://apps.apple.com/us/app/tikneo/id6651859831" },
+      { kind: "android", url: "https://play.google.com/store/apps/details?id=com.tikneoapp.tikneoapp" },
+    ],
+    stack: ["React Native", "iOS", "Android"],
+  },
+  {
+    slug: "polypop",
+    name: "PolyPop",
+    url: "https://polypop.corpsc.com",
+    kind: "client",
+    category: { es: "App web & móvil", en: "Web & mobile app" },
+    summary: {
+      es: "Aplicación disponible en web y como app móvil en iOS y Android.",
+      en: "Available on the web and as a mobile app on iOS and Android.",
+    },
+    links: [
+      { kind: "ios", url: "https://apps.apple.com/us/app/polypop/id6755899118" },
+      { kind: "android", url: "https://play.google.com/store/apps/details?id=com.tikneo.popmobile" },
+    ],
+    stack: ["React.js", "React Native", "iOS", "Android"],
   },
   {
     slug: "zendinit",
@@ -180,11 +211,74 @@ export const projects: Project[] = [
     name: "Orlegitech",
     url: "https://app.orlegitech.com",
     kind: "client",
-    category: { es: "Gestión empresarial · ES / EN", en: "Business management · ES / EN" },
+    category: { es: "Gestión empresarial · Web & iOS", en: "Business management · Web & iOS" },
     summary: {
-      es: "Plataforma multilingüe de gestión empresarial.",
-      en: "Multilingual business-management platform.",
+      es: "Plataforma multilingüe de gestión empresarial, disponible en web y como app iOS.",
+      en: "Multilingual business-management platform, available on the web and as an iOS app.",
     },
-    stack: ["React.js"],
+    links: [
+      { kind: "ios", url: "https://apps.apple.com/us/app/orlegitech/id6755734300" },
+    ],
+    stack: ["React.js", "React Native", "iOS"],
+  },
+  {
+    slug: "tikneo-saas",
+    name: "Tikneo SaaS Platform",
+    url: "https://tikneo.com",
+    kind: "client",
+    highlight: true,
+    category: { es: "SaaS multi-tenant · Alta disponibilidad", en: "Multi-tenant SaaS · High availability" },
+    summary: {
+      es: "API multi-inquilino con procesamiento asíncrono de tareas y comunicación en tiempo real, con suite de pruebas E2E automatizadas.",
+      en: "Multi-tenant API with asynchronous task processing and real-time communication, backed by an automated E2E test suite.",
+    },
+    stack: ["Django/DRF", "Celery", "MySQL", "Channels", "Firebase", "AWS", "Playwright", "pytest"],
+  },
+  {
+    slug: "calculum",
+    name: "Calculum",
+    url: "https://www.calculum.ai",
+    kind: "client",
+    highlight: true,
+    category: { es: "API Core · Datos corporativos", en: "Core API · Corporate data" },
+    summary: {
+      es: "Solución corporativa orientada al rendimiento: consultas complejas vía GraphQL, indexación avanzada de datos y mensajería desacoplada para alta carga.",
+      en: "Performance-oriented corporate solution: complex GraphQL queries, advanced data indexing and decoupled messaging for high load.",
+    },
+    stack: ["Symfony", "API Platform", "GraphQL", "PostgreSQL", "MongoDB", "Elasticsearch", "RabbitMQ", "Vue 3", "Vite"],
+  },
+  {
+    slug: "emasex",
+    name: "Emasex",
+    url: "https://emasex.com",
+    kind: "client",
+    category: { es: "E-commerce & CMS avanzado", en: "E-commerce & advanced CMS" },
+    summary: {
+      es: "Tienda online a medida optimizada para SEO y conversión, con CMS avanzado y motor de búsqueda inteligente ultrarrápido.",
+      en: "Custom online store optimized for SEO and conversion, with an advanced CMS and an ultra-fast smart search engine.",
+    },
+    stack: ["Laravel", "Nova", "Livewire", "Algolia", "Tailwind CSS"],
+  },
+  {
+    slug: "quant-trading-bots",
+    name: "Quant Trading Bots",
+    kind: "client",
+    category: { es: "Trading cuantitativo · Escritorio", en: "Quant trading · Desktop" },
+    summary: {
+      es: "Herramientas automatizadas de análisis de mercados en tiempo real, ejecución de órdenes de baja latencia y gestión de riesgo, con bot multiextensión (Bitunix) e interfaz gráfica y estrategias Grid Trading.",
+      en: "Automated tools for real-time market analysis, low-latency order execution and risk management — a multi-exchange bot (Bitunix) with a GUI plus advanced Grid Trading strategies.",
+    },
+    stack: ["Python", "CCXT", "Pandas", "PyQt5"],
+  },
+  {
+    slug: "marketing-app",
+    name: "Marketing Automation",
+    kind: "client",
+    category: { es: "Growth Hacking · Automatización", en: "Growth hacking · Automation" },
+    summary: {
+      es: "Dashboard interactivo para la gestión de campañas automatizadas y el envío de notificaciones masivas a través de canales de mensajería instantánea.",
+      en: "Interactive dashboard to manage automated campaigns and send bulk notifications through instant-messaging channels.",
+    },
+    stack: ["Streamlit", "Python", "WhatsApp Gateway"],
   },
 ];

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Dict } from "@/i18n/get-dictionary";
 
 export default function Leadership({ dict }: { dict: Dict }) {
@@ -11,9 +12,22 @@ export default function Leadership({ dict }: { dict: Dict }) {
       </div>
 
       <div className="container-page">
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto grid max-w-5xl gap-10 lg:grid-cols-12 lg:items-start">
+          {/* Photo */}
+          <div className="lg:col-span-4">
+            <div className="surface-card relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-2xl">
+              <Image
+                src="/images/ceo-portrait.jpg"
+                alt={dict.leadership.photoAlt}
+                fill
+                sizes="(min-width: 1024px) 33vw, 100vw"
+                className="object-cover"
+              />
+            </div>
+          </div>
+
           {/* Text column */}
-          <div>
+          <div className="lg:col-span-8">
             <span className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.22em] text-accent">
               <span className="h-px w-6 bg-accent/60" />
               {dict.leadership.eyebrow}

@@ -3,6 +3,7 @@ import type { Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/get-dictionary";
 import LanguageToggle from "./LanguageToggle";
 import Logo from "./Logo";
+import MobileMenu from "./MobileMenu";
 import ThemeToggle from "./ThemeToggle";
 
 interface Props {
@@ -41,10 +42,16 @@ export default function Navbar({ locale, dict }: Props) {
           <LanguageToggle current={locale} />
           <Link
             href="#contact"
-            className="hidden rounded-full bg-fg px-4 py-2 text-sm font-semibold text-surface transition hover:opacity-90 md:inline-flex"
+            className="hidden rounded-full bg-fg px-4 py-2 text-sm font-semibold text-surface transition hover:opacity-90 lg:inline-flex"
           >
             {dict.nav.cta}
           </Link>
+          <MobileMenu
+            items={items}
+            ctaHref="#contact"
+            ctaLabel={dict.nav.cta}
+            menuLabel={dict.nav.menu}
+          />
         </div>
       </div>
     </header>

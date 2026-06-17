@@ -8,6 +8,8 @@ export interface Dictionary {
     stack: string;
     contact: string;
     cta: string;
+    menu: string;
+    skip: string;
     theme: { light: string; dark: string };
   };
   hero: {
@@ -49,6 +51,7 @@ export interface Dictionary {
     title: string;
     name: string;
     role: string;
+    photoAlt: string;
     bio: ReadonlyArray<string>;
     quote: string;
     contactLabel: string;
@@ -69,6 +72,9 @@ export interface Dictionary {
       message: string;
       submit: string;
     };
+    whatsappCta: string;
+    success: string;
+    emailSubject: string;
     direct: {
       emailLabel: string;
       phoneLabel: string;
