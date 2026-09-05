@@ -14,6 +14,8 @@ export interface Project {
   url?: string;
   /** Extra platform/store links (Google Play, App Store) shown as buttons. */
   links?: ProjectLink[];
+  /** Screenshot under /public/images/projects. Required to appear in the hero carousel. */
+  image?: string;
   kind: ProjectKind;
   category: { es: string; en: string };
   summary: { es: string; en: string };
@@ -25,6 +27,7 @@ export const projects: Project[] = [
   // ── Own products (CORPSC SaaS portfolio) ──────────────────────────
   {
     slug: "take",
+    image: "/images/projects/take.jpg",
     name: "Take",
     url: "https://take.corpsc.com",
     kind: "own",
@@ -51,6 +54,7 @@ export const projects: Project[] = [
   },
   {
     slug: "iris-natural",
+    image: "/images/projects/iris-natural.jpg",
     name: "Iris Natural",
     url: "https://irisnatural.corpsc.com",
     kind: "own",
@@ -113,6 +117,7 @@ export const projects: Project[] = [
   // ── Client work ────────────────────────────────────────────────────
   {
     slug: "kods-ai",
+    image: "/images/projects/kods-ai.jpg",
     name: "Kods AI",
     url: "https://kods.ai",
     kind: "client",
@@ -180,6 +185,7 @@ export const projects: Project[] = [
   },
   {
     slug: "polypop",
+    image: "/images/projects/polypop.jpg",
     name: "PolyPop",
     url: "https://polypop.corpsc.com",
     kind: "client",
@@ -196,6 +202,7 @@ export const projects: Project[] = [
   },
   {
     slug: "zendinit",
+    image: "/images/projects/zendinit.jpg",
     name: "Zendinit",
     url: "https://zendinit.com",
     kind: "client",
@@ -223,6 +230,7 @@ export const projects: Project[] = [
   },
   {
     slug: "tikneo-saas",
+    image: "/images/projects/tikneo-saas.jpg",
     name: "Tikneo SaaS Platform",
     url: "https://tikneo.com",
     kind: "client",
@@ -236,6 +244,7 @@ export const projects: Project[] = [
   },
   {
     slug: "calculum",
+    image: "/images/projects/calculum.jpg",
     name: "Calculum",
     url: "https://www.calculum.ai",
     kind: "client",
@@ -282,3 +291,26 @@ export const projects: Project[] = [
     stack: ["Streamlit", "Python", "WhatsApp Gateway"],
   },
 ];
+
+/**
+ * Slides for the hero carousel, in display order. Client work leads — it is the
+ * strongest proof for a prospect — then our own products.
+ * Every slug here must point to a project that has an `image`.
+ */
+export const heroSlides: readonly string[] = [
+  "kods-ai",
+  "tikneo-saas",
+  "calculum",
+  "polypop",
+  "zendinit",
+  "take",
+  "iris-natural",
+];
+
+export const heroProjects: readonly Project[] = heroSlides.map((slug) => {
+  const project = projects.find((p) => p.slug === slug);
+  if (!project?.image) {
+    throw new Error(`heroSlides: "${slug}" is missing from projects or has no image`);
+  }
+  return project;
+});

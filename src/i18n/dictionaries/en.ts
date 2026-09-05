@@ -26,6 +26,13 @@ const dict: Dictionary = {
       "A software studio based in Santa Cruz de la Sierra, Bolivia, designing and building web platforms, mobile apps, APIs and multi-tenant SaaS for clients across Bolivia, Latin America and Europe. 20+ projects in production, full-stack engineering across multiple stacks, and E2E test coverage.",
     primaryCta: "Start a project",
     secondaryCta: "View work",
+    carousel: {
+      label: "Projects built by CORPSC",
+      prev: "Previous project",
+      next: "Next project",
+      goTo: "Go to project {n}",
+      visit: "View project",
+    },
     stats: [
       { value: "9+", label: "years building software" },
       { value: "20+", label: "projects in production" },

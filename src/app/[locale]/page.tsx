@@ -24,7 +24,7 @@ export default async function HomePage({
     <>
       <Navbar locale={locale} dict={dict} />
       <main id="main" tabIndex={-1} className="relative scroll-mt-0 outline-none">
-        <Hero dict={dict} />
+        <Hero dict={dict} locale={locale} />
         <About dict={dict} />
         <Services dict={dict} />
         <Projects dict={dict} locale={locale} />
