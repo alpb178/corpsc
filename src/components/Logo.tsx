@@ -6,26 +6,36 @@ export default function Logo({ locale }: { locale: Locale }) {
   return (
     <Link
       href={`/${locale}`}
-      className="group inline-flex items-center"
+      className="group inline-flex items-center gap-2.5"
       aria-label="CORPSC"
     >
+      <Image
+        src="/images/logo-mark.jpg"
+        alt=""
+        aria-hidden
+        width={512}
+        height={512}
+        priority
+        className="h-9 w-9 rounded-xl object-cover ring-1 ring-line-strong transition group-hover:opacity-90"
+      />
+
       {/* light theme */}
       <Image
-        src="/images/logo.png"
+        src="/images/wordmark-light.png"
         alt="CORPSC"
-        width={820}
-        height={288}
+        width={863}
+        height={145}
         priority
-        className="h-9 w-auto dark:hidden"
+        className="h-[15px] w-auto dark:hidden"
       />
       {/* dark theme */}
       <Image
-        src="/images/logo-dark.png"
+        src="/images/wordmark-dark.png"
         alt="CORPSC"
-        width={820}
-        height={288}
+        width={863}
+        height={145}
         priority
-        className="hidden h-9 w-auto dark:block"
+        className="hidden h-[15px] w-auto dark:block"
       />
     </Link>
   );
