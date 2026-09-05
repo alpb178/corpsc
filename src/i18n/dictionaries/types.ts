@@ -19,6 +19,14 @@ export interface Dictionary {
     subtitle: string;
     primaryCta: string;
     secondaryCta: string;
+    carousel: {
+      label: string;
+      prev: string;
+      next: string;
+      /** Uses {n} as a placeholder for the 1-based slide number. */
+      goTo: string;
+      visit: string;
+    };
     stats: ReadonlyArray<{ value: string; label: string }>;
   };
   about: {

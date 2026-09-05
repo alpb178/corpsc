@@ -1,7 +1,9 @@
 import Link from "next/link";
+import type { Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/get-dictionary";
+import HeroCarousel from "./HeroCarousel";
 
-export default function Hero({ dict }: { dict: Dict }) {
+export default function Hero({ dict, locale }: { dict: Dict; locale: Locale }) {
   return (
     <section className="relative overflow-hidden pt-20 pb-24 sm:pt-28 sm:pb-32">
       {/* Background glow */}
@@ -27,40 +29,46 @@ export default function Hero({ dict }: { dict: Dict }) {
       </div>
 
       <div className="container-page">
-        <div className="flex flex-col items-start gap-8 lg:max-w-3xl">
-          <span className="reveal inline-flex items-center gap-2 rounded-full border border-line bg-card px-3 py-1 text-xs font-medium text-fg-muted">
-            <span className="h-1.5 w-1.5 rounded-full bg-positive shadow-[0_0_12px_var(--color-positive)]" />
-            {dict.hero.eyebrow}
-          </span>
+        <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-10">
+          <div className="flex flex-col items-start gap-8 lg:col-span-6">
+            <span className="reveal inline-flex items-center gap-2 rounded-full border border-line bg-card px-3 py-1 text-xs font-medium text-fg-muted">
+              <span className="h-1.5 w-1.5 rounded-full bg-positive shadow-[0_0_12px_var(--color-positive)]" />
+              {dict.hero.eyebrow}
+            </span>
 
-          <h1 className="reveal text-balance text-4xl font-semibold leading-[1.04] tracking-tight sm:text-6xl lg:text-[5rem]" style={{ animationDelay: "60ms" }}>
-            <span className="text-gradient">{dict.hero.title}</span>{" "}
-            <span className="text-accent-gradient">{dict.hero.titleAccent}</span>
-          </h1>
+            <h1 className="reveal text-balance text-4xl font-semibold leading-[1.04] tracking-tight sm:text-6xl lg:text-[3.5rem] xl:text-[4rem]" style={{ animationDelay: "60ms" }}>
+              <span className="text-gradient">{dict.hero.title}</span>{" "}
+              <span className="text-accent-gradient">{dict.hero.titleAccent}</span>
+            </h1>
 
-          <p
-            className="reveal max-w-2xl text-balance text-base text-fg-muted sm:text-lg"
-            style={{ animationDelay: "120ms" }}
-          >
-            {dict.hero.subtitle}
-          </p>
-
-          <div className="reveal flex flex-wrap items-center gap-3" style={{ animationDelay: "180ms" }}>
-            <Link
-              href="#contact"
-              className="inline-flex items-center gap-2 rounded-full bg-fg px-5 py-3 text-sm font-semibold text-surface transition hover:translate-y-[-1px] hover:opacity-90"
+            <p
+              className="reveal max-w-2xl text-balance text-base text-fg-muted sm:text-lg"
+              style={{ animationDelay: "120ms" }}
             >
-              {dict.hero.primaryCta}
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </Link>
-            <Link
-              href="#projects"
-              className="inline-flex items-center gap-2 rounded-full border border-line bg-card px-5 py-3 text-sm font-semibold text-fg transition hover:border-line-strong"
-            >
-              {dict.hero.secondaryCta}
-            </Link>
+              {dict.hero.subtitle}
+            </p>
+
+            <div className="reveal flex flex-wrap items-center gap-3" style={{ animationDelay: "180ms" }}>
+              <Link
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-full bg-fg px-5 py-3 text-sm font-semibold text-surface transition hover:translate-y-[-1px] hover:opacity-90"
+              >
+                {dict.hero.primaryCta}
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </Link>
+              <Link
+                href="#projects"
+                className="inline-flex items-center gap-2 rounded-full border border-line bg-card px-5 py-3 text-sm font-semibold text-fg transition hover:border-line-strong"
+              >
+                {dict.hero.secondaryCta}
+              </Link>
+            </div>
+          </div>
+
+          <div className="reveal lg:col-span-6" style={{ animationDelay: "240ms" }}>
+            <HeroCarousel dict={dict} locale={locale} />
           </div>
         </div>
 

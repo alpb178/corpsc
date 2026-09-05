@@ -32,3 +32,18 @@ Todos se generan a partir del logo maestro (cuadrado, ~1254 px):
 
 Para cambiar el logo: reemplaza el archivo maestro y regenera los cinco assets
 manteniendo los mismos nombres y proporciones.
+
+---
+
+# Screenshots del carrousel del hero
+
+`public/images/projects/*.jpg` alimenta el carrousel de `src/components/HeroCarousel.tsx`.
+
+- Capturados a 1440×900 con `deviceScaleFactor: 2`, recortados a 16:10 y
+  guardados como JPEG progresivo (calidad 82), 1600×1000.
+- Qué proyecto aparece y en qué orden se controla en `heroSlides`
+  (`src/content/projects.ts`). Cada slug de esa lista debe tener `image`;
+  si no, el build falla a propósito.
+- Para añadir uno: captura el sitio, guarda `public/images/projects/<slug>.jpg`,
+  pon `image: "/images/projects/<slug>.jpg"` en el proyecto y añade el slug a
+  `heroSlides`.

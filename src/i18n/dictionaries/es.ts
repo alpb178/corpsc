@@ -26,6 +26,13 @@ const dict: Dictionary = {
       "Estudio con base en Santa Cruz de la Sierra, Bolivia, diseñando y construyendo plataformas web, aplicaciones móviles, APIs y SaaS multi-inquilino para clientes en Bolivia, Latinoamérica y Europa. Más de 20 proyectos en producción, ingeniería full-stack en múltiples stacks y cobertura de pruebas E2E.",
     primaryCta: "Iniciar un proyecto",
     secondaryCta: "Ver proyectos",
+    carousel: {
+      label: "Proyectos desarrollados por CORPSC",
+      prev: "Proyecto anterior",
+      next: "Proyecto siguiente",
+      goTo: "Ir al proyecto {n}",
+      visit: "Ver proyecto",
+    },
     stats: [
       { value: "9+", label: "años desarrollando software" },
       { value: "20+", label: "proyectos en producción" },
