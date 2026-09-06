@@ -11,7 +11,7 @@ export default function ThemeToggle({ label }: { label: { light: string; dark: s
       onClick={toggle}
       aria-label={isDark ? label.light : label.dark}
       title={isDark ? label.light : label.dark}
-      className="relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-line bg-card text-fg-muted transition hover:bg-card/80 hover:text-fg"
+      className="relative inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/70 transition hover:border-white/40 hover:text-white"
     >
       {/* Sun */}
       <svg

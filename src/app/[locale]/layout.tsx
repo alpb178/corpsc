@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Archivo, Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import { isLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
@@ -7,6 +7,15 @@ import { ThemeProvider, themeBootstrapScript } from "@/components/ThemeProvider"
 import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
+
+// Display face. Archivo holds its shape at large sizes and tight tracking,
+// which is what the hero headline leans on; Inter keeps the body text.
+const archivo = Archivo({
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["600", "700"],
+  variable: "--font-archivo",
+});
 
 export async function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -86,11 +95,17 @@ export default async function LocaleLayout({
   };
 
   return (
-    <html lang={locale} className={inter.variable} suppressHydrationWarning>
-      <head>
-        <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
-      </head>
+    <html
+      lang={locale}
+      className={`${inter.variable} ${archivo.variable}`}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
       <body className="bg-surface text-fg antialiased font-sans">
+        {/* Runs before anything paints. It only ever needs to run on a fresh
+            document, which is why the locale switch below is a full navigation
+            rather than a client transition. */}
+        <script dangerouslySetInnerHTML={{ __html: themeBootstrapScript }} />
         <a href="#main" className="skip-link">
           {dict.nav.skip}
         </a>

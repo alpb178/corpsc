@@ -53,6 +53,13 @@ export interface Dictionary {
     clientTab: string;
     visit: string;
     stackLabel: string;
+    /** Status line over the card screenshot. */
+    live: string;
+    /** Badge on highlighted projects. */
+    featured: string;
+    /** Ownership label on a single card. */
+    ownBadge: string;
+    clientBadge: string;
   };
   leadership: {
     eyebrow: string;

@@ -5,13 +5,19 @@
 
 /* ──────────────────────────────────────────────────────────────────
    Semantic design tokens
-   These map to CSS variables that are flipped by the .light / .dark
-   classes on <html>. Components consume them via Tailwind utilities
-   like bg-surface, text-fg, border-line, etc.
+
+   The palette is derived from the CORPSC emblem — the deep navy of its
+   background and the blue of the mark — so nothing here is borrowed from
+   another company's brand.
+
+   Section rhythm is carried by three grounds (paper → band → deep) rather
+   than by decoration. `deep` stays dark in both themes: that is what keeps
+   the page reading as one system when the viewer flips the toggle.
    ────────────────────────────────────────────────────────────────── */
 @theme {
   --color-surface: var(--surface);
   --color-elevated: var(--elevated);
+  --color-deep: var(--deep);
   --color-card: var(--card);
   --color-line: var(--line);
   --color-line-strong: var(--line-strong);
@@ -26,85 +32,74 @@
   --color-accent-strong: var(--accent-strong);
   --color-accent-contrast: var(--accent-contrast);
 
-  --color-positive: #34d39a;
+  --color-positive: #1a9c6b;
   --color-positive-text: var(--positive-text);
 
-  /* Legacy ink scale kept for the small handful of low-level styles
-     that still want a fixed dark value (e.g. button on white). */
-  --color-ink-950: #05060a;
-  --color-ink-900: #0a0c14;
-  --color-ink-800: #11141d;
-  --color-ink-700: #181c28;
-  --color-ink-600: #232a3a;
-  --color-ink-500: #3a4358;
-  --color-ink-400: #6b7589;
-  --color-ink-300: #97a0b3;
-  --color-ink-200: #c3c9d6;
-  --color-ink-100: #e5e8ef;
-  --color-ink-50: #f5f6fa;
+  /* Fixed brand values. The header and the deep bands use these in both
+     themes, so they never resolve through --surface. */
+  --color-brand-navy: #06132e;
+  --color-brand-navy-soft: #0b2a6b;
+  --color-brand-blue: #1668e3;
+  --color-brand-blue-light: #7fb0ff;
 
-  --color-lime: #c9f364;
+  /* Containers are crisp (Oracle); only actions are pills (ServiceNow). */
+  --radius-tile: 6px;
 
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Default = dark. Falls back if no class is set yet. */
+/* Default = light. Enterprise pages read as paper first. */
 :root,
-.dark {
-  color-scheme: dark;
-
-  --surface: #05060a;
-  --elevated: #0d1119;
-  --card: rgba(255, 255, 255, 0.04);
-  --line: rgba(255, 255, 255, 0.08);
-  --line-strong: rgba(255, 255, 255, 0.14);
-
-  --fg: #f5f6fa;
-  --fg-muted: #c3c9d6;
-  --fg-subtle: #97a0b3;
-  --fg-faint: #8a93a6;
-
-  --positive-text: #34d39a;
-
-  --accent: #6f9aff;
-  --accent-soft: rgba(111, 154, 255, 0.18);
-  --accent-strong: #4a7bff;
-  --accent-contrast: #0a0c14;
-
-  --hero-glow-1: rgba(74, 123, 255, 0.28);
-  --hero-glow-2: rgba(31, 72, 196, 0.32);
-  --hero-glow-3: rgba(201, 243, 100, 0.12);
-}
-
 .light {
   color-scheme: light;
 
   --surface: #ffffff;
-  --elevated: #f7f8fc;
-  --card: rgba(15, 23, 42, 0.03);
-  --line: rgba(15, 23, 42, 0.08);
-  --line-strong: rgba(15, 23, 42, 0.16);
+  --elevated: #f1f3f7;
+  --deep: #06132e;
+  --card: #ffffff;
+  --line: #d7dce6;
+  --line-strong: #b4bece;
 
-  --fg: #0a0c14;
-  --fg-muted: #3a4358;
-  --fg-subtle: #5b6478;
-  --fg-faint: #677085;
+  --fg: #0d1526;
+  --fg-muted: #48546b;
+  --fg-subtle: #5f6b82;
+  --fg-faint: #78839a;
 
   --positive-text: #0f7a55;
 
-  --accent: #1f48c4;
-  --accent-soft: rgba(31, 72, 196, 0.1);
-  --accent-strong: #2f60f0;
+  --accent: #1668e3;
+  --accent-soft: rgba(22, 104, 227, 0.08);
+  --accent-strong: #0f52bd;
   --accent-contrast: #ffffff;
+}
 
-  --hero-glow-1: rgba(47, 96, 240, 0.18);
-  --hero-glow-2: rgba(31, 72, 196, 0.16);
-  --hero-glow-3: rgba(201, 243, 100, 0.18);
+.dark {
+  color-scheme: dark;
+
+  --surface: #06132e;
+  --elevated: #0a1c3d;
+  --deep: #030b1d;
+  --card: rgba(255, 255, 255, 0.04);
+  --line: rgba(255, 255, 255, 0.12);
+  --line-strong: rgba(255, 255, 255, 0.22);
+
+  --fg: #eef2f9;
+  --fg-muted: #b6c2d8;
+  --fg-subtle: #93a1bb;
+  --fg-faint: #7b89a4;
+
+  --positive-text: #4ade9f;
+
+  --accent: #7fb0ff;
+  --accent-soft: rgba(127, 176, 255, 0.14);
+  --accent-strong: #4d90ff;
+  --accent-contrast: #06132e;
 }
 
 html {
   scroll-behavior: smooth;
-  /* keep anchor targets clear of the 64px sticky header */
+  /* keep anchor targets clear of the sticky header */
   scroll-padding-top: 5rem;
 }
 
@@ -112,22 +107,20 @@ html,
 body {
   background: var(--surface);
   color: var(--fg);
-  font-feature-settings: "ss01", "cv11";
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  transition: background-color 0.35s ease, color 0.35s ease;
 }
 
 ::selection {
-  background: var(--accent-strong);
-  color: white;
+  background: var(--color-brand-blue);
+  color: #ffffff;
 }
 
 /* Visible keyboard focus across all interactive elements. */
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--color-brand-blue-light);
   outline-offset: 2px;
-  border-radius: 6px;
+  border-radius: 4px;
 }
 
 /* Skip-to-content link — hidden until focused. */
@@ -138,8 +131,8 @@ body {
   z-index: 100;
   padding: 0.5rem 0.875rem;
   border-radius: 9999px;
-  background: var(--fg);
-  color: var(--surface);
+  background: var(--color-brand-blue);
+  color: #ffffff;
   font-size: 0.875rem;
   font-weight: 600;
   transform: translateY(-150%);
@@ -164,98 +157,177 @@ body {
     }
   }
 
-  .grain {
-    background-image: radial-gradient(rgba(127, 127, 127, 0.04) 1px, transparent 1px);
-    background-size: 3px 3px;
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.022em;
   }
 
   .text-balance {
     text-wrap: balance;
   }
 
-  .text-gradient {
-    background: linear-gradient(180deg, var(--fg) 0%, var(--fg-subtle) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  /* ── Section bands ────────────────────────────────────────────────
+     Three grounds carry the vertical rhythm. `band-deep` redefines the
+     foreground tokens so any component dropped inside it inherits legible
+     colours without needing a variant of its own. */
+  .band-paper {
+    background: var(--surface);
   }
 
-  .text-accent-gradient {
-    background: linear-gradient(90deg, var(--accent) 0%, var(--color-lime) 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  .band-alt {
+    background: var(--elevated);
   }
 
-  /* Card surface — adapts to both themes. */
-  .surface-card {
-    background: linear-gradient(180deg, var(--card), transparent);
-    border: 1px solid var(--line);
+  .band-deep {
+    background: var(--deep);
+
+    /* Both layers have to be redefined. Tailwind resolves --color-* once at
+       :root, so descendants inherit an already-substituted value — overriding
+       only --fg here would leave every text-fg utility on the light value.
+       The raw vars are still needed by the hand-written rules below. */
+    --surface: #06132e;
+    --elevated: #0b1f42;
+    --card: rgba(255, 255, 255, 0.05);
+    --line: rgba(255, 255, 255, 0.14);
+    --line-strong: rgba(255, 255, 255, 0.26);
+    --fg: #eef2f9;
+    --fg-muted: #b6c2d8;
+    --fg-subtle: #93a1bb;
+    --fg-faint: #8494ae;
+    --accent: #7fb0ff;
+
+    --color-surface: #06132e;
+    --color-elevated: #0b1f42;
+    --color-card: rgba(255, 255, 255, 0.05);
+    --color-line: rgba(255, 255, 255, 0.14);
+    --color-line-strong: rgba(255, 255, 255, 0.26);
+    --color-fg: #eef2f9;
+    --color-fg-muted: #b6c2d8;
+    --color-fg-subtle: #93a1bb;
+    --color-fg-faint: #8494ae;
+    --color-accent: #7fb0ff;
+    --color-accent-soft: rgba(127, 176, 255, 0.16);
+    --color-accent-strong: #a8c9ff;
+    --color-accent-contrast: #06132e;
+
+    color: #eef2f9;
   }
 
-  .surface-card-strong {
-    background: linear-gradient(180deg, color-mix(in oklab, var(--fg) 6%, transparent), transparent);
-    border: 1px solid var(--line);
+  /* ── Cell grids ───────────────────────────────────────────────────
+     Hairline grid built from per-cell borders rather than `gap-px` over a
+     tinted background: a partial last row leaves empty space, not stray
+     coloured blocks where the tracks have no content. */
+  .cell-grid {
+    border-top: 1px solid var(--line);
+    border-left: 1px solid var(--line);
   }
 
-  /* Glass header */
-  .glass-header {
-    background: color-mix(in oklab, var(--surface) 75%, transparent);
-    -webkit-backdrop-filter: blur(16px) saturate(140%);
-    backdrop-filter: blur(16px) saturate(140%);
+  .cell-grid > * {
+    border-right: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
   }
 
-  .ring-line {
-    box-shadow: inset 0 0 0 1px var(--line);
+  /* ── Tiles ────────────────────────────────────────────────────────
+     Oracle's bordered tile: 1px line, small radius, no shadow, no fill
+     gradient. Hover moves the border only — the tile does not lift. */
+  .tile {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-tile);
   }
 
-  /* Marquee for the clients strip */
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
+  .tile-link {
+    transition: border-color 0.15s ease;
   }
 
-  .marquee-track {
-    display: flex;
-    width: max-content;
-    animation: marquee 28s linear infinite;
+  .tile-link:hover {
+    border-color: var(--accent);
   }
 
-  .marquee-mask {
-    -webkit-mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
-    mask-image: linear-gradient(90deg, transparent, black 12%, black 88%, transparent);
+  /* ── Actions ──────────────────────────────────────────────────────
+     Pills, from ServiceNow. Deliberately the only round things here. */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.2;
+    transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   }
 
-  /* Reveal-on-load (no JS): items become visible after a tiny stagger. */
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(8px); }
-    to   { opacity: 1; transform: translateY(0); }
+  .btn-primary {
+    background: var(--color-brand-blue);
+    color: #ffffff;
+    border: 1px solid var(--color-brand-blue);
   }
 
-  .reveal {
-    animation: rise 0.7s ease-out both;
+  .btn-primary:hover {
+    background: #0f52bd;
+    border-color: #0f52bd;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--fg);
+    border: 1px solid var(--line-strong);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--fg);
+  }
+
+  /* WhatsApp's own green and white label, fixed in both themes — the pairing
+     from WhatsApp's brand kit, so the button is recognised before anyone
+     reads it. */
+  .btn-whatsapp {
+    background: #25d366;
+    color: #ffffff;
+    border: 1px solid #25d366;
+  }
+
+  .btn-whatsapp:hover {
+    background: #1fbd5b;
+    border-color: #1fbd5b;
+  }
+
+  /* ── Header ───────────────────────────────────────────────────────
+     Always the brand navy, in both themes — the way ServiceNow keeps its
+     header dark regardless of the page behind it. */
+  .site-header {
+    background: var(--color-brand-navy);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    color: #eef2f9;
+  }
+
+  /* A rule above a section heading, carrying the accent. */
+  .heading-rule::before {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 3px;
+    margin-bottom: 1.25rem;
+    background: var(--color-brand-blue);
+  }
+
+  .band-deep .heading-rule::before {
+    background: var(--color-brand-blue-light);
   }
 }
 
-/* Respect users who prefer reduced motion. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
 
-  html,
-  body {
-    transition: none;
-  }
-
-  .reveal {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-
-  .marquee-track {
-    animation: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
