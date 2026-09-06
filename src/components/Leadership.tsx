@@ -1,67 +1,53 @@
 import type { Dict } from "@/i18n/get-dictionary";
+import Reveal from "./Reveal";
 
 export default function Leadership({ dict }: { dict: Dict }) {
   return (
-    <section id="leadership" className="relative py-24 sm:py-32">
-      <div className="absolute inset-0 -z-10">
-        <div
-          className="absolute left-1/2 top-1/2 h-[40rem] w-[40rem] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
-          style={{ background: "var(--hero-glow-2)" }}
-        />
-      </div>
-
+    <section id="leadership" className="band-deep py-20 sm:py-28">
       <div className="container-page">
-        <div className="mx-auto max-w-3xl">
-          {/* Text column */}
-          <div>
-            <span className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.22em] text-accent">
-              <span className="h-px w-6 bg-accent/60" />
-              {dict.leadership.eyebrow}
-            </span>
-            <h2 className="mt-4 text-balance text-3xl font-semibold leading-tight tracking-tight text-fg sm:text-5xl">
-              {dict.leadership.title}
-            </h2>
+        <Reveal className="border-b border-line pb-8">
+          <p className="heading-rule text-sm font-medium text-fg-faint">
+            {dict.leadership.eyebrow}
+          </p>
+          <h2 className="font-display max-w-2xl text-balance text-3xl font-bold leading-[1.1] text-fg sm:text-4xl lg:text-5xl">
+            {dict.leadership.title}
+          </h2>
+        </Reveal>
 
-            <div className="mt-6">
-              <p className="text-2xl font-semibold text-fg sm:text-3xl">
-                {dict.leadership.name}
-              </p>
-              <p className="mt-1 text-sm font-medium uppercase tracking-[0.18em] text-accent">
-                {dict.leadership.role}
-              </p>
-            </div>
+        <Reveal delay={120} className="mt-12 grid gap-10 lg:grid-cols-12 lg:gap-12">
+          <div className="lg:col-span-4">
+            <p className="font-display text-2xl font-semibold text-fg">
+              {dict.leadership.name}
+            </p>
+            <p className="mt-1.5 text-sm text-accent">{dict.leadership.role}</p>
 
-            <div className="mt-6 space-y-4 text-base text-fg-muted sm:text-lg">
-              {dict.leadership.bio.map((paragraph, idx) => (
-                <p key={idx}>{paragraph}</p>
-              ))}
-            </div>
-
-            <blockquote className="surface-card mt-8 rounded-2xl border-l-4 border-l-accent px-6 py-5 text-base italic text-fg sm:text-lg">
-              “{dict.leadership.quote}”
-            </blockquote>
-
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <a
-                href="mailto:alpb17.08@gmail.com"
-                className="inline-flex items-center gap-2 rounded-full bg-fg px-5 py-3 text-sm font-semibold text-surface transition hover:opacity-90"
-              >
+            <div className="mt-7 flex flex-wrap items-center gap-3">
+              <a href="mailto:alpb17.08@gmail.com" className="btn btn-primary">
                 {dict.leadership.contactLabel}
               </a>
               <a
                 href="https://www.linkedin.com/in/alpb1708/"
                 target="_blank"
                 rel="noreferrer noopener"
-                className="inline-flex items-center gap-2 rounded-full border border-line bg-card px-5 py-3 text-sm font-semibold text-fg transition hover:border-line-strong"
+                className="btn btn-secondary"
               >
                 LinkedIn
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
               </a>
             </div>
           </div>
-        </div>
+
+          <div className="lg:col-span-8">
+            <div className="space-y-4 text-base leading-relaxed text-fg-muted">
+              {dict.leadership.bio.map((paragraph, idx) => (
+                <p key={idx}>{paragraph}</p>
+              ))}
+            </div>
+
+            <blockquote className="mt-8 border-l-2 border-[var(--color-brand-blue-light)] pl-5 text-lg leading-relaxed text-fg">
+              {dict.leadership.quote}
+            </blockquote>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

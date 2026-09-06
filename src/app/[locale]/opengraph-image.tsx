@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { locales } from "@/i18n/config";
 
@@ -16,6 +18,8 @@ export default async function OpengraphImage({
 }) {
   const { locale } = await params;
   const en = locale === "en";
+  const mark = await readFile(join(process.cwd(), "public/images/logo-mark.jpg"));
+  const markSrc = `data:image/jpeg;base64,${mark.toString("base64")}`;
   const title = en
     ? "We build custom software, end-to-end."
     : "Desarrollamos software a medida, de extremo a extremo.";
@@ -39,14 +43,12 @@ export default async function OpengraphImage({
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "20px" }}>
-          <div
-            style={{
-              width: 56,
-              height: 56,
-              borderRadius: 16,
-              display: "flex",
-              background: "linear-gradient(135deg, #6f9aff, #c9f364)",
-            }}
+          <img
+            src={markSrc}
+            alt=""
+            width={56}
+            height={56}
+            style={{ width: 56, height: 56, borderRadius: 16 }}
           />
           <div style={{ fontSize: 40, fontWeight: 700, letterSpacing: -1 }}>CORPSC</div>
         </div>

@@ -3,24 +3,21 @@ import Section from "./Section";
 
 export default function TechStack({ dict }: { dict: Dict }) {
   return (
-    <Section id="stack" eyebrow={dict.stack.eyebrow} title={dict.stack.title} align="center">
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <Section id="stack" band="paper" eyebrow={dict.stack.eyebrow} title={dict.stack.title}>
+      <div className="cell-grid grid md:grid-cols-2 lg:grid-cols-3">
         {dict.stack.groups.map((group) => (
-          <div
-            key={group.label}
-            className="surface-card rounded-2xl p-6"
-          >
-            <p className="text-xs uppercase tracking-[0.18em] text-accent">{group.label}</p>
-            <div className="mt-4 flex flex-wrap gap-2">
+          <div key={group.label} className="bg-surface p-6">
+            <h3 className="text-sm font-semibold text-fg">{group.label}</h3>
+            <ul className="mt-3.5 flex flex-wrap gap-1.5">
               {group.items.map((item) => (
-                <span
+                <li
                   key={item}
-                  className="rounded-full border border-line bg-card px-3 py-1.5 text-sm text-fg"
+                  className="rounded-[3px] border border-line px-2 py-1 text-xs text-fg-muted"
                 >
                   {item}
-                </span>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         ))}
       </div>

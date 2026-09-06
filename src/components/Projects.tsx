@@ -1,9 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { projects, type ProjectKind, type ProjectLink, type ProjectLinkKind } from "@/content/projects";
 import type { Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/get-dictionary";
+import Reveal from "./Reveal";
+import Section from "./Section";
 
 interface Props {
   dict: Dict;
@@ -28,28 +31,32 @@ function linkLabel(link: ProjectLink): string {
 function PlatformIcon({ kind }: { kind: ProjectLinkKind }) {
   if (kind === "android") {
     return (
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M4.2 3.3c-.3.2-.45.5-.45.9v15.6c0 .4.15.7.45.9l9.05-8.7L4.2 3.3zm10.3 7.05 2.55-2.45-9.4-5.3 6.85 7.75zm0 3.3-6.85 7.75 9.4-5.3-2.55-2.45zm1.05-1.65 2.5 1.4c.65.37.65 1.3 0 1.67l-2.5 1.4-2.7-2.24 2.7-2.23z" />
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M3.609 1.814 13.792 12 3.61 22.186c-.352-.338-.61-.83-.61-1.428V3.242c0-.598.258-1.09.609-1.428zm11.24 11.244 2.257 2.257-11.83 6.744 9.573-9.001zm0-2.116L5.276 1.941l11.83 6.744-2.257 2.257zm1.488 1.488 3.195 1.821c.91.519.91 1.365 0 1.884l-3.195 1.821-2.008-2.008 2.008-2.018z" />
       </svg>
     );
   }
   if (kind === "ios") {
     return (
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-        <path d="M17.05 12.5c0-2.3 1.9-3.4 2-3.45-1.1-1.6-2.8-1.8-3.4-1.85-1.45-.15-2.83.85-3.56.85-.73 0-1.86-.83-3.06-.81-1.57.02-3.02.91-3.83 2.32-1.63 2.83-.42 7.02 1.17 9.32.78 1.12 1.7 2.38 2.91 2.34 1.17-.05 1.61-.76 3.02-.76 1.41 0 1.8.76 3.04.73 1.26-.02 2.05-1.14 2.82-2.27.89-1.3 1.26-2.56 1.28-2.62-.03-.01-2.45-.94-2.48-3.72zM14.7 5.3c.64-.78 1.07-1.86.95-2.94-.92.04-2.04.61-2.7 1.39-.59.69-1.11 1.79-.97 2.85 1.03.08 2.08-.52 2.72-1.3z" />
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8.92-2.85-.9.04-1.99.6-2.64 1.35-.58.67-1.09 1.74-.95 2.77 1 .08 2.03-.51 2.67-1.27z" />
       </svg>
     );
   }
   return (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    <span
+      aria-hidden="true"
+      className="text-base leading-none transition-transform group-hover/btn:-translate-y-0.5 group-hover/btn:translate-x-0.5"
+    >
+      ↗
+    </span>
   );
 }
 
 export default function Projects({ dict, locale }: Props) {
-  // Lead with client work — it's the strongest proof for a prospect.
-  const [active, setActive] = useState<ProjectKind>("client");
+  // Lead with our own products — they are the ones CORPSC builds, runs and
+  // answers for, and the hero carousel already puts them first.
+  const [active, setActive] = useState<ProjectKind>("own");
 
   const visible = projects.filter((p) => p.kind === active);
 
@@ -66,150 +73,186 @@ export default function Projects({ dict, locale }: Props) {
     },
   ];
 
+  // Underline tabs rather than a pill switch — they read as navigation
+  // through a catalogue, which is what this section is. The count rides in a
+  // chip beside the label so the size of each set is visible before clicking.
+  const tabBar = (
+    <nav
+      aria-label={dict.projects.eyebrow}
+      className="flex w-full items-center gap-2 border-b border-line pb-1 lg:w-auto lg:border-b-0 lg:pb-0"
+    >
+      {tabs.map((tab) => {
+        const isActive = active === tab.kind;
+        return (
+          <button
+            key={tab.kind}
+            type="button"
+            onClick={() => setActive(tab.kind)}
+            aria-pressed={isActive}
+            className={
+              "group relative flex items-center gap-2 px-4 py-2 text-sm transition-colors " +
+              (isActive ? "font-bold text-accent" : "font-semibold text-fg-faint hover:text-fg")
+            }
+          >
+            <span>{tab.label}</span>
+            <span
+              className={
+                "inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs transition-colors " +
+                (isActive
+                  ? "bg-accent-soft font-bold text-accent"
+                  : "bg-elevated font-semibold text-fg-faint group-hover:text-fg")
+              }
+            >
+              {tab.count}
+            </span>
+            {isActive ? (
+              <span
+                aria-hidden="true"
+                className="absolute inset-x-0 bottom-0 h-0.5 rounded-full bg-[var(--color-brand-blue)]"
+              />
+            ) : null}
+          </button>
+        );
+      })}
+    </nav>
+  );
+
   return (
-    <section id="projects" className="relative py-24 sm:py-32">
-      <div className="container-page">
-        <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
-          <span className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.22em] text-accent">
-            <span className="h-px w-6 bg-accent/60" />
-            {dict.projects.eyebrow}
-          </span>
-          <h2 className="text-balance text-3xl font-semibold leading-tight tracking-tight text-fg sm:text-5xl">
-            {dict.projects.title}
-          </h2>
-          <p className="text-balance text-base text-fg-muted sm:text-lg">{dict.projects.subtitle}</p>
+    <Section
+      id="projects"
+      band="alt"
+      eyebrow={dict.projects.eyebrow}
+      title={dict.projects.title}
+      subtitle={dict.projects.subtitle}
+      aside={tabBar}
+      revealChildren={false}
+    >
+      <div className="grid grid-cols-1 items-stretch gap-7 md:grid-cols-2 lg:grid-cols-3">
+        {visible.map((project, index) => {
+          const links: ProjectLink[] = [
+            ...(project.url ? [{ kind: "web" as const, url: project.url }] : []),
+            ...(project.links ?? []),
+          ];
+          // The button is the link now, so the card itself is not an anchor —
+          // that would nest interactive elements.
+          const [primary, ...secondary] = links;
 
-          <div className="mt-6 inline-flex items-center gap-1 rounded-full border border-line bg-card p-1 text-sm">
-            {tabs.map((tab) => {
-              const isActive = active === tab.kind;
-              return (
-                <button
-                  key={tab.kind}
-                  type="button"
-                  onClick={() => setActive(tab.kind)}
-                  className={
-                    "inline-flex items-center gap-2 rounded-full px-4 py-2 font-medium transition " +
-                    (isActive
-                      ? "bg-fg text-surface"
-                      : "text-fg-subtle hover:text-fg")
-                  }
-                >
-                  {tab.label}
-                  <span
-                    className={
-                      "rounded-full px-1.5 text-xs " +
-                      (isActive
-                        ? "bg-surface/15 text-surface"
-                        : "bg-line text-fg-subtle")
-                    }
-                  >
-                    {tab.count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
-        </div>
-
-        <div className="mt-14 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {visible.map((project) => {
-            const links: ProjectLink[] = [
-              ...(project.url ? [{ kind: "web" as const, url: project.url }] : []),
-              ...(project.links ?? []),
-            ];
-            // A single web link makes the whole card clickable; store links
-            // render as separate buttons (nested <a> inside <a> is invalid).
-            const wholeCardLink = links.length === 1 && links[0].kind === "web";
-
-            const cardClass =
-              "surface-card group relative flex flex-col overflow-hidden rounded-2xl p-6 transition" +
-              (wholeCardLink ? " hover:-translate-y-1 hover:border-line-strong" : "");
-
-            const inner = (
-              <>
-                <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent to-transparent opacity-0 transition group-hover:opacity-100" />
-
-                <div className="flex items-center justify-between gap-2">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-line bg-card px-2.5 py-1 text-[11px] uppercase tracking-wider text-fg-muted">
-                    {project.kind === "own" ? "CORPSC" : locale === "es" ? "Cliente" : "Client"}
-                  </span>
-                  {project.highlight ? (
-                    <span className="inline-flex items-center gap-1 rounded-full bg-positive/15 px-2 py-0.5 text-[11px] font-medium text-positive-text">
-                      ★ {locale === "es" ? "Destacado" : "Featured"}
-                    </span>
-                  ) : null}
-                </div>
-
-                <h3 className="mt-5 text-xl font-semibold text-fg">{project.name}</h3>
-                <p className="mt-1 text-xs uppercase tracking-wide text-accent">
-                  {project.category[locale]}
-                </p>
-                <p className="mt-3 text-sm text-fg-muted">{project.summary[locale]}</p>
-
-                <div className="mt-5 flex flex-wrap gap-1.5">
-                  {project.stack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="rounded-md border border-line bg-card px-2 py-0.5 text-[11px] text-fg-muted"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-6 flex items-center justify-between gap-3 border-t border-line pt-4 text-xs">
-                  {wholeCardLink ? (
-                    <>
-                      <span className="text-fg-faint">{hostFromUrl(links[0].url)}</span>
-                      <span className="inline-flex items-center gap-1 font-medium text-fg transition group-hover:gap-2">
-                        {dict.projects.visit}
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <path d="M7 17 17 7M9 7h8v8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                      </span>
-                    </>
-                  ) : links.length > 0 ? (
-                    <div className="flex flex-wrap gap-2">
-                      {links.map((link) => (
-                        <a
-                          key={link.url}
-                          href={link.url}
-                          target="_blank"
-                          rel="noreferrer noopener"
-                          className="inline-flex items-center gap-1.5 rounded-full border border-line bg-card px-3 py-1.5 font-medium text-fg transition hover:border-line-strong"
-                        >
-                          <PlatformIcon kind={link.kind} />
-                          {linkLabel(link)}
-                        </a>
-                      ))}
-                    </div>
+          return (
+            // Cards arrive one after another. The stagger is capped so the last
+            // row of a long tab does not sit blank for a second and a half.
+            <Reveal key={project.slug} delay={Math.min(index, 5) * 90} className="h-full">
+              <article className="group flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-surface shadow-[0_1px_3px_rgba(13,21,38,0.04),0_1px_2px_rgba(13,21,38,0.02)] transition-all duration-300 ease-out hover:-translate-y-3 hover:border-line-strong hover:shadow-[0_28px_45px_-12px_rgba(13,21,38,0.16),0_2px_6px_rgba(13,21,38,0.06)] motion-reduce:transition-none motion-reduce:hover:translate-y-0">
+                {/* Preview window: the real screenshot, with the status line,
+                    the name and the ownership label laid over it. */}
+                <div className="relative h-[230px] w-full overflow-hidden bg-[var(--color-brand-navy)]">
+                  {project.image ? (
+                    <Image
+                      src={project.image}
+                      alt=""
+                      aria-hidden
+                      fill
+                      sizes="(min-width: 1024px) 30vw, (min-width: 768px) 45vw, 90vw"
+                      className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.04] motion-reduce:transition-none motion-reduce:group-hover:scale-100"
+                    />
                   ) : (
-                    <span className="text-fg-faint">
-                      {locale === "es" ? "Proyecto privado" : "Private project"}
+                    <span
+                      aria-hidden="true"
+                      className="font-display absolute inset-0 grid place-items-center text-3xl font-bold text-white/25"
+                    >
+                      {project.name.slice(0, 2).toUpperCase()}
                     </span>
                   )}
-                </div>
-              </>
-            );
 
-            return wholeCardLink ? (
-              <a
-                key={project.slug}
-                href={links[0].url}
-                target="_blank"
-                rel="noreferrer noopener"
-                className={cardClass}
-              >
-                {inner}
-              </a>
-            ) : (
-              <div key={project.slug} className={cardClass}>
-                {inner}
-              </div>
-            );
-          })}
-        </div>
+                  {/* Scrim on both ends so the overlaid chrome stays legible
+                      over any screenshot. */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-b from-black/55 via-black/10 to-black/85"
+                  />
+
+                  <div className="relative z-10 flex h-full flex-col justify-between p-5">
+                    <div className="flex items-start justify-between gap-3">
+                      <span className="flex items-center gap-2 text-xs font-medium text-white/85">
+                        <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+                        {dict.projects.live}
+                      </span>
+
+                      {project.highlight ? (
+                        <span className="inline-flex items-center rounded-full bg-white px-2.5 py-0.5 text-xs font-bold tracking-wide text-[#0d1526] shadow-sm">
+                          {dict.projects.featured}
+                        </span>
+                      ) : null}
+                    </div>
+
+                    <div className="flex items-end justify-between gap-3 border-t border-white/15 pt-2">
+                      <h3 className="font-display truncate text-base font-extrabold tracking-tight text-white">
+                        {project.name}
+                      </h3>
+                      <span className="shrink-0 text-[11px] text-white/70">
+                        {project.kind === "own" ? dict.projects.ownBadge : dict.projects.clientBadge}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="mb-3">
+                    <span className="inline-block rounded-md bg-accent-soft px-2.5 py-1 text-xs font-bold text-accent">
+                      {project.category[locale]}
+                    </span>
+                  </div>
+
+                  <p className="mb-5 text-sm leading-relaxed text-fg-muted">
+                    {project.summary[locale]}
+                  </p>
+
+                  <ul aria-label={dict.projects.stackLabel} className="mb-6 flex flex-wrap gap-1.5">
+                    {project.stack.map((tech) => (
+                      <li
+                        key={tech}
+                        className="rounded border border-line bg-elevated px-2 py-1 text-xs font-medium text-fg-subtle"
+                      >
+                        {tech}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-auto space-y-2 pt-2">
+                    {primary ? (
+                      <a
+                        href={primary.url}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="btn btn-primary group/btn w-full"
+                      >
+                        {primary.kind === "web" ? dict.projects.visit : linkLabel(primary)}
+                        <PlatformIcon kind={primary.kind} />
+                      </a>
+                    ) : null}
+
+                    {secondary.length > 0 ? (
+                      <div className={secondary.length > 1 ? "grid grid-cols-2 gap-2" : "grid gap-2"}>
+                        {secondary.map((link) => (
+                          <a
+                            key={link.url}
+                            href={link.url}
+                            target="_blank"
+                            rel="noreferrer noopener"
+                            className="btn btn-secondary group/btn !px-3 !py-2 !text-xs"
+                          >
+                            <PlatformIcon kind={link.kind} />
+                            {linkLabel(link)}
+                          </a>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              </article>
+            </Reveal>
+          );
+        })}
       </div>
-    </section>
+    </Section>
   );
 }

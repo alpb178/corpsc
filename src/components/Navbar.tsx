@@ -6,12 +6,7 @@ import Logo from "./Logo";
 import MobileMenu from "./MobileMenu";
 import ThemeToggle from "./ThemeToggle";
 
-interface Props {
-  locale: Locale;
-  dict: Dict;
-}
-
-export default function Navbar({ locale, dict }: Props) {
+export default function Navbar({ locale, dict }: { locale: Locale; dict: Dict }) {
   const items = [
     { href: "#about", label: dict.nav.about },
     { href: "#services", label: dict.nav.services },
@@ -21,16 +16,16 @@ export default function Navbar({ locale, dict }: Props) {
   ];
 
   return (
-    <header className="sticky top-0 z-50 glass-header">
+    <header className="sticky top-0 z-50 site-header">
       <div className="container-page flex h-16 items-center justify-between gap-6">
-        <Logo locale={locale} />
+        <Logo locale={locale} tone="onDark" />
 
-        <nav className="hidden items-center gap-8 text-sm text-fg-muted lg:flex">
+        <nav className="hidden items-center gap-7 text-sm lg:flex">
           {items.map((item) => (
             <a
               key={item.href}
               href={item.href}
-              className="transition hover:text-fg"
+              className="text-white/70 transition hover:text-white"
             >
               {item.label}
             </a>
@@ -40,12 +35,13 @@ export default function Navbar({ locale, dict }: Props) {
         <div className="flex items-center gap-2">
           <ThemeToggle label={dict.nav.theme} />
           <LanguageToggle current={locale} />
-          <Link
-            href="#contact"
-            className="hidden rounded-full bg-fg px-4 py-2 text-sm font-semibold text-surface transition hover:opacity-90 lg:inline-flex"
-          >
-            {dict.nav.cta}
-          </Link>
+          {/* Wrapper, not `hidden` on the Link: `.btn` sets display and would
+              win the specificity tie against the utility. */}
+          <div className="hidden lg:block">
+            <Link href="#contact" className="btn btn-primary !px-4 !py-2">
+              {dict.nav.cta}
+            </Link>
+          </div>
           <MobileMenu
             items={items}
             ctaHref="#contact"

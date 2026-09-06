@@ -2,31 +2,64 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 
-export default function Logo({ locale }: { locale: Locale }) {
+/**
+ * `tone="onDark"` pins the light wordmark, for the navy header and the deep
+ * bands where the surrounding theme tokens do not apply.
+ */
+export default function Logo({
+  locale,
+  tone = "auto",
+}: {
+  locale: Locale;
+  tone?: "auto" | "onDark";
+}) {
+  const onDark = tone === "onDark";
+
   return (
     <Link
       href={`/${locale}`}
-      className="group inline-flex items-center"
+      className="inline-flex items-center gap-2.5"
       aria-label="CORPSC"
     >
-      {/* light theme */}
       <Image
-        src="/images/logo.png"
-        alt="CORPSC"
-        width={820}
-        height={288}
+        src="/images/logo-mark.jpg"
+        alt=""
+        aria-hidden
+        width={512}
+        height={512}
         priority
-        className="h-9 w-auto dark:hidden"
+        className="h-9 w-9 rounded-md object-cover"
       />
-      {/* dark theme */}
-      <Image
-        src="/images/logo-dark.png"
-        alt="CORPSC"
-        width={820}
-        height={288}
-        priority
-        className="hidden h-9 w-auto dark:block"
-      />
+
+      {onDark ? (
+        <Image
+          src="/images/wordmark-dark.png"
+          alt="CORPSC"
+          width={863}
+          height={145}
+          priority
+          className="h-[15px] w-auto"
+        />
+      ) : (
+        <>
+          <Image
+            src="/images/wordmark-light.png"
+            alt="CORPSC"
+            width={863}
+            height={145}
+            priority
+            className="h-[15px] w-auto dark:hidden"
+          />
+          <Image
+            src="/images/wordmark-dark.png"
+            alt="CORPSC"
+            width={863}
+            height={145}
+            priority
+            className="hidden h-[15px] w-auto dark:block"
+          />
+        </>
+      )}
     </Link>
   );
 }

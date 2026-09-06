@@ -6,11 +6,11 @@ import Logo from "./Logo";
 export default function Footer({ dict, locale }: { dict: Dict; locale: Locale }) {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t border-line bg-surface">
+    <footer className="band-deep border-t border-white/10">
       <div className="container-page py-14">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="space-y-4 lg:col-span-5">
-            <Logo locale={locale} />
+            <Logo locale={locale} tone="onDark" />
             <p className="max-w-sm text-sm text-fg-muted">{dict.footer.tagline}</p>
           </div>
 
@@ -47,7 +47,7 @@ export default function Footer({ dict, locale }: { dict: Dict; locale: Locale })
 function FooterCol({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="text-xs uppercase tracking-[0.18em] text-fg-faint">{title}</p>
+      <p className="text-sm font-semibold text-fg">{title}</p>
       <div className="mt-4 flex flex-col gap-2 text-sm text-fg-muted [&>a:hover]:text-fg [&>a]:transition">
         {children}
       </div>

@@ -19,6 +19,14 @@ export interface Dictionary {
     subtitle: string;
     primaryCta: string;
     secondaryCta: string;
+    carousel: {
+      label: string;
+      prev: string;
+      next: string;
+      /** Uses {n} as a placeholder for the 1-based slide number. */
+      goTo: string;
+      visit: string;
+    };
     stats: ReadonlyArray<{ value: string; label: string }>;
   };
   about: {
@@ -45,6 +53,13 @@ export interface Dictionary {
     clientTab: string;
     visit: string;
     stackLabel: string;
+    /** Status line over the card screenshot. */
+    live: string;
+    /** Badge on highlighted projects. */
+    featured: string;
+    /** Ownership label on a single card. */
+    ownBadge: string;
+    clientBadge: string;
   };
   leadership: {
     eyebrow: string;
