@@ -21,7 +21,7 @@ export default function MobileMenu({ items, ctaHref, ctaLabel, menuLabel }: Prop
         aria-expanded={open}
         aria-controls="mobile-menu"
         onClick={() => setOpen((v) => !v)}
-        className="flex h-9 w-9 items-center justify-center rounded-full border border-line bg-card text-fg transition hover:border-line-strong"
+        className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white transition hover:border-white/40"
       >
         {open ? (
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -37,7 +37,7 @@ export default function MobileMenu({ items, ctaHref, ctaLabel, menuLabel }: Prop
       {open ? (
         <div
           id="mobile-menu"
-          className="absolute left-0 right-0 top-16 border-b border-line glass-header"
+          className="absolute left-0 right-0 top-16 site-header"
         >
           <nav className="container-page flex flex-col gap-1 py-4 text-sm">
             {items.map((item) => (
@@ -45,7 +45,7 @@ export default function MobileMenu({ items, ctaHref, ctaLabel, menuLabel }: Prop
                 key={item.href}
                 href={item.href}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-2.5 text-fg-muted transition hover:bg-card hover:text-fg"
+                className="rounded-md px-3 py-2.5 text-white/70 transition hover:bg-white/5 hover:text-white"
               >
                 {item.label}
               </a>
@@ -53,7 +53,7 @@ export default function MobileMenu({ items, ctaHref, ctaLabel, menuLabel }: Prop
             <Link
               href={ctaHref}
               onClick={() => setOpen(false)}
-              className="mt-2 inline-flex items-center justify-center rounded-full bg-fg px-4 py-2.5 text-sm font-semibold text-surface transition hover:opacity-90"
+              className="btn btn-primary mt-2"
             >
               {ctaLabel}
             </Link>

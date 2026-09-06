@@ -20,10 +20,10 @@ const dict: Dictionary = {
   },
   hero: {
     eyebrow: "Estudio de desarrollo de software",
-    title: "Desarrollamos software a medida",
-    titleAccent: "de extremo a extremo.",
+    title: "Convertimos ideas en productos digitales",
+    titleAccent: "que crecen.",
     subtitle:
-      "Estudio con base en Santa Cruz de la Sierra, Bolivia, diseñando y construyendo plataformas web, aplicaciones móviles, APIs y SaaS multi-inquilino para clientes en Bolivia, Latinoamérica y Europa. Más de 20 proyectos en producción, ingeniería full-stack en múltiples stacks y cobertura de pruebas E2E.",
+      "Diseñamos, desarrollamos y evolucionamos plataformas web, aplicaciones móviles y soluciones SaaS para empresas que buscan llevar sus operaciones al siguiente nivel. 14 proyectos en producción y 9+ años de experiencia construyendo software para clientes en Bolivia, Latinoamérica y Europa.",
     primaryCta: "Iniciar un proyecto",
     secondaryCta: "Ver proyectos",
     carousel: {
@@ -35,7 +35,7 @@ const dict: Dictionary = {
     },
     stats: [
       { value: "9+", label: "años desarrollando software" },
-      { value: "20+", label: "proyectos en producción" },
+      { value: "14", label: "proyectos en producción" },
       { value: "10+", label: "tecnologías y stacks" },
       { value: "3", label: "países de operación" },
     ],
@@ -51,7 +51,7 @@ const dict: Dictionary = {
     pillars: [
       {
         title: "Software en producción",
-        body: "Operamos 7 productos propios y 13 plataformas para clientes. Sabemos lo que cuesta mantener software vivo.",
+        body: "Operamos 7 productos propios y 7 plataformas para clientes. Sabemos lo que cuesta mantener software vivo.",
       },
       {
         title: "Ingeniería full-stack",
@@ -59,7 +59,7 @@ const dict: Dictionary = {
       },
       {
         title: "Arquitectura escalable",
-        body: "Diseños headless, multi-inquilino y orientados a APIs (REST / GraphQL) para crecer sin reescribir.",
+        body: "Diseños headless, multi-tenant y orientados a APIs (REST / GraphQL) para crecer sin reescribir.",
       },
       {
         title: "Calidad con E2E",
@@ -81,11 +81,11 @@ const dict: Dictionary = {
       {
         title: "Aplicaciones móviles",
         body: "Apps multiplataforma con React Native y nativo Android publicadas en Google Play.",
-        bullets: ["React Native", "Android (Java / Kotlin)", "Publicación en stores"],
+        bullets: ["React Native", "Android (Java / Kotlin)", "Publicación en App Store y Google Play"],
       },
       {
         title: "Backends headless",
-        body: "Strapi y Node.js como backbone — datos versionados, APIs limpias y panel para tu equipo.",
+        body: "Strapi y Node.js como base — datos versionados, APIs limpias y panel para tu equipo.",
         bullets: ["Strapi CMS", "Node.js · REST · GraphQL", "PostgreSQL · MySQL · MongoDB"],
       },
       {
@@ -96,12 +96,12 @@ const dict: Dictionary = {
       {
         title: "Desarrollo con IA",
         body: "Integramos Claude AI y Cursor IDE en el ciclo de desarrollo para acelerar entregas sin sacrificar calidad.",
-        bullets: ["Claude AI · Cursor IDE", "Prompt engineering aplicado", "Reviews asistidos"],
+        bullets: ["Claude AI · Cursor IDE", "Prompt engineering aplicado", "Revisiones de código asistidas"],
       },
       {
         title: "Producto a medida",
         body: "Acompañamos desde el descubrimiento hasta el lanzamiento — pensamos como dueños, no como freelance.",
-        bullets: ["Discovery técnico", "Roadmap incremental", "Soporte post-lanzamiento"],
+        bullets: ["Descubrimiento técnico", "Hoja de ruta incremental", "Soporte post-lanzamiento"],
       },
     ],
   },
@@ -112,7 +112,11 @@ const dict: Dictionary = {
       "Separamos los productos propios de CORPSC del trabajo entregado para clientes. Todo en producción, todo verificable.",
     ownTab: "Productos propios",
     clientTab: "Clientes",
-    visit: "Visitar",
+    visit: "Visitar sitio",
+    live: "En producción",
+    featured: "Destacado",
+    ownBadge: "Producto propio",
+    clientBadge: "Proyecto de cliente",
     stackLabel: "Stack",
   },
   leadership: {
@@ -123,7 +127,7 @@ const dict: Dictionary = {
     photoAlt: "Alejandro Pérez, Fundador y CEO de CORPSC",
     bio: [
       "Ingeniero Informático graduado de la Universidad Tecnológica de La Habana (CUJAE) con más de 9 años desarrollando aplicaciones web, móviles y APIs para clientes internacionales.",
-      "Desarrollador full-stack con dominio de React.js, TypeScript y Vue en el frontend, y de Node.js, Django, Symfony, Laravel y Python en el backend, sobre arquitecturas headless y multi-inquilino.",
+      "Desarrollador full-stack con dominio de React.js, TypeScript y Vue en el frontend, y de Node.js, Django, Symfony, Laravel y Python en el backend, sobre arquitecturas headless y multi-tenant.",
       "Además de liderar CORPSC, opera personalmente varios productos SaaS en producción y mantiene aplicaciones React Native publicadas en Google Play.",
     ],
     quote:
@@ -162,7 +166,7 @@ const dict: Dictionary = {
     },
     whatsappCta: "Enviar por WhatsApp",
     success:
-      "Abrimos tu app de correo con el mensaje listo — solo pulsa enviar. Si no se abrió, escríbenos por WhatsApp o a nuestro email.",
+      "Abrimos tu app de correo con el mensaje listo — solo dale a enviar. Si no se abrió, escríbenos por WhatsApp o a nuestro email.",
     emailSubject: "Nuevo contacto desde corpsc.com",
     direct: {
       emailLabel: "Email",

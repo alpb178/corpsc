@@ -20,10 +20,10 @@ const dict: Dictionary = {
   },
   hero: {
     eyebrow: "Software development studio",
-    title: "We build custom software",
-    titleAccent: "end-to-end.",
+    title: "We turn ideas into digital products",
+    titleAccent: "that grow.",
     subtitle:
-      "A software studio based in Santa Cruz de la Sierra, Bolivia, designing and building web platforms, mobile apps, APIs and multi-tenant SaaS for clients across Bolivia, Latin America and Europe. 20+ projects in production, full-stack engineering across multiple stacks, and E2E test coverage.",
+      "We design, build and evolve web platforms, mobile apps and SaaS for companies ready to take their operations further. 14 projects in production and 9+ years building software for clients across Bolivia, Latin America and Europe.",
     primaryCta: "Start a project",
     secondaryCta: "View work",
     carousel: {
@@ -35,7 +35,7 @@ const dict: Dictionary = {
     },
     stats: [
       { value: "9+", label: "years building software" },
-      { value: "20+", label: "projects in production" },
+      { value: "14", label: "projects in production" },
       { value: "10+", label: "technologies & stacks" },
       { value: "3", label: "countries of operation" },
     ],
@@ -51,7 +51,7 @@ const dict: Dictionary = {
     pillars: [
       {
         title: "Software in production",
-        body: "We operate 7 of our own products and 13 client platforms. We know what it costs to keep software alive.",
+        body: "We operate 7 of our own products and 7 client platforms. We know what it costs to keep software alive.",
       },
       {
         title: "Full-stack engineering",
@@ -112,7 +112,11 @@ const dict: Dictionary = {
       "We separate CORPSC's own products from work delivered for clients. Everything live, everything verifiable.",
     ownTab: "Own products",
     clientTab: "Clients",
-    visit: "Visit",
+    visit: "Visit site",
+    live: "In production",
+    featured: "Featured",
+    ownBadge: "Own product",
+    clientBadge: "Client project",
     stackLabel: "Stack",
   },
   leadership: {

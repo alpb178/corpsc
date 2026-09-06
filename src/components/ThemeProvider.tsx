@@ -50,8 +50,9 @@ export function useTheme() {
 }
 
 /**
- * Inline script written into the <head> to set the theme class BEFORE
- * React hydrates. This avoids the white-flash when reloading dark mode.
+ * Inline script rendered as the first node in <body> to set the theme class
+ * BEFORE React hydrates and before anything paints. This avoids the
+ * white-flash when reloading dark mode.
  */
 export const themeBootstrapScript = `
 (function(){
