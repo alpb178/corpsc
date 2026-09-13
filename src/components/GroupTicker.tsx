@@ -69,6 +69,7 @@ function TickerRow({
 // depending on each one's Tailwind setup.
 const CSS = `
 .gt {
+  position: relative;
   display: flex;
   flex: none;
   align-items: center;
@@ -78,7 +79,7 @@ const CSS = `
   /* The site header carries the same navy, so without this rule the strip
      would blend straight into it. */
   border-bottom: 1px solid rgba(127, 176, 255, 0.22);
-  color: #dfe7f5;
+  color: #ffffff;
   font-size: 0.8125rem;
   line-height: 1;
 }
@@ -86,19 +87,42 @@ const CSS = `
   position: relative;
   flex: 1;
   overflow: hidden;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
+}
+/* The edges fade with gradients of the strip's own background rather than
+   mask-image: on iOS Safari a mask can freeze the animation running
+   underneath it. */
+.gt-viewport::before,
+.gt-viewport::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 24px;
+  z-index: 1;
+  pointer-events: none;
+}
+.gt-viewport::before {
+  left: 0;
+  background: linear-gradient(90deg, #06132e, rgba(6, 19, 46, 0));
+}
+.gt-viewport::after {
+  right: 0;
+  background: linear-gradient(270deg, #06132e, rgba(6, 19, 46, 0));
 }
 .gt-track {
   display: flex;
   width: max-content;
+  will-change: transform;
   animation: gt-scroll 38s linear infinite;
 }
-/* Pauses on hover and when focus lands inside, so a link can be read and
-   clicked without chasing it. */
-.gt:hover .gt-track,
+/* Pause on hover only where there is a pointer: on touch, :hover sticks
+   after the first tap and would leave the strip stopped for good. Keyboard
+   focus always pauses it. */
 .gt-track:focus-within {
   animation-play-state: paused;
+}
+@media (hover: hover) and (pointer: fine) {
+  .gt:hover .gt-track { animation-play-state: paused; }
 }
 .gt-row {
   display: flex;
@@ -129,13 +153,13 @@ const CSS = `
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
 }
 .gt-name { font-weight: 600; }
-.gt-url { color: #93a4c4; }
-.gt-desc { color: #7387aa; }
+.gt-url { color: #ffffff; }
+.gt-desc { color: #ffffff; }
 /* Separator between the link and its blurb; decorative, hence CSS. */
 .gt-desc::before {
   content: "·";
   margin-right: 0.5rem;
-  color: #43587d;
+  color: rgba(255, 255, 255, 0.5);
 }
 @keyframes gt-scroll {
   from { transform: translateX(0); }
