@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { isLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { ThemeProvider, themeBootstrapScript } from "@/components/ThemeProvider";
+import GroupTicker from "@/components/GroupTicker";
 import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
@@ -109,7 +110,10 @@ export default async function LocaleLayout({
         <a href="#main" className="skip-link">
           {dict.nav.skip}
         </a>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <GroupTicker dict={dict} locale={locale} />
+          {children}
+        </ThemeProvider>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
