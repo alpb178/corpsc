@@ -97,6 +97,10 @@ export interface Dictionary {
       locationValue: string;
     };
   };
+  ticker: {
+    /** Accessible name of the top strip of sibling sites. */
+    label: string;
+  };
   footer: {
     tagline: string;
     rights: string;

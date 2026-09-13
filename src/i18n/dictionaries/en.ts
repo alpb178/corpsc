@@ -175,6 +175,9 @@ const dict: Dictionary = {
       locationValue: "Santa Cruz de la Sierra, Bolivia · Remote LATAM / EU",
     },
   },
+  ticker: {
+    label: "Sites of interest",
+  },
   footer: {
     tagline: "Software development studio · Web · Mobile · APIs · Full-stack.",
     rights: "All rights reserved.",
