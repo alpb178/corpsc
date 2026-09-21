@@ -71,7 +71,7 @@ No hay base de datos aquí: se manda el hecho suelto a
 ```
 src/components/Analytics.tsx   visita por ruta y clic saliente (cliente)
 src/lib/outbound.ts            a qué proyecto apunta un enlace, leído de projects.ts
-src/app/api/track/route.ts     recoge, filtra bots y reenvía al hub con la clave
+src/app/api/hub-track/route.ts recoge, filtra bots y reenvía al hub con la clave
 ```
 
 Tres cosas que conviene no deshacer:
@@ -83,7 +83,7 @@ Tres cosas que conviene no deshacer:
   de proyecto, un botón de tienda o una sección nueva se cuentan sin que nadie
   se acuerde de añadir un handler, y el destino se resuelve contra
   `src/content/projects.ts`, que ya es el registro canónico.
-- **La cookie de visita (`corpsc_v`) es un identificador aleatorio y nada más.**
+- **La cookie de visita (`hub_v`) es un identificador aleatorio y nada más.**
   Es `httpOnly`, dura 30 minutos de inactividad y solo sirve para que cinco
   páginas no cuenten como cinco visitas. No se manda ni IP, ni agente de
   usuario, ni referer.

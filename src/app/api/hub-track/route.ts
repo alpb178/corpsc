@@ -23,13 +23,14 @@ const MAX_EVENTS = 50;
 
 /**
  * The visit cookie. Half an hour of inactivity closes the visit, which is the
- * usual session window, and it never outlives the browser session either.
+ * usual session window, and it never outlives the browser session either. The
+ * name is the same across the group's sites so the five integrations read alike.
  *
  * It holds a random id and nothing else: no identity, no history, nothing that
  * survives a closed browser. It is what keeps five pages from counting as five
  * visits.
  */
-const SESSION_COOKIE = "corpsc_v";
+const SESSION_COOKIE = "hub_v";
 const SESSION_MINUTES = 30;
 
 /**

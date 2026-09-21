@@ -8,7 +8,7 @@ import { resolveOutbound } from "@/lib/outbound";
  * The site's own analytics: one page view per route, one event per click that
  * leaves for a sibling site.
  *
- * Both go to `/api/track`, which is what talks to the hub — the key stays on
+ * Both go to `/api/hub-track`, which is what talks to the hub — the key stays on
  * the server. Everything here is best-effort: if it fails, nothing about the
  * page changes.
  *
@@ -72,11 +72,11 @@ function send(event: TrackedEvent, beacon = false): void {
   const body = JSON.stringify({ events: [event] });
 
   if (beacon && typeof navigator.sendBeacon === "function") {
-    navigator.sendBeacon("/api/track", new Blob([body], { type: "application/json" }));
+    navigator.sendBeacon("/api/hub-track", new Blob([body], { type: "application/json" }));
     return;
   }
 
-  void fetch("/api/track", {
+  void fetch("/api/hub-track", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body,
