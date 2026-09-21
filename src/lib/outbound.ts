@@ -35,16 +35,26 @@ for (const project of projects) {
   }
 }
 
-/** `null` when the link goes nowhere we track — an internal anchor, a mailto. */
-export function resolveOutbound(href: string): OutboundTarget | null {
+/**
+ * `null` when the link goes nowhere we track — an internal anchor, a mailto.
+ *
+ * Resolved with no fallback base on purpose: with one, a relative link like
+ * `/es` would resolve against this site's own domain and count as a click
+ * leaving for ourselves. `ownHost` covers the same case for absolute links
+ * back to this site.
+ */
+export function resolveOutbound(href: string, ownHost?: string): OutboundTarget | null {
   let url: URL;
   try {
-    url = new URL(href, "https://www.corpsc.com");
+    url = new URL(href);
   } catch {
     return null;
   }
 
   if (url.protocol !== "http:" && url.protocol !== "https:") return null;
 
-  return BY_URL.get(url.href) ?? BY_HOST.get(url.host.replace(/^www\./, "")) ?? null;
+  const host = url.host.replace(/^www\./, "");
+  if (ownHost && host === ownHost.replace(/^www\./, "")) return null;
+
+  return BY_URL.get(url.href) ?? BY_HOST.get(host) ?? null;
 }

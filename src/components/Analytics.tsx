@@ -36,7 +36,7 @@ export default function Analytics() {
       const anchor = (event.target as Element | null)?.closest?.("a[href]");
       if (!(anchor instanceof HTMLAnchorElement)) return;
 
-      const target = resolveOutbound(anchor.href);
+      const target = resolveOutbound(anchor.href, window.location.host);
       if (!target) return;
 
       send(
