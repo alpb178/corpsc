@@ -5,6 +5,7 @@ import { isLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { ThemeProvider, themeBootstrapScript } from "@/components/ThemeProvider";
 import GroupTicker from "@/components/GroupTicker";
+import Analytics from "@/components/Analytics";
 import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
@@ -114,6 +115,9 @@ export default async function LocaleLayout({
           <GroupTicker dict={dict} locale={locale} />
           {children}
         </ThemeProvider>
+        {/* Renders nothing: counts the visit and the clicks that leave for a
+            sibling site, and sends them to the group's hub. */}
+        <Analytics />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
