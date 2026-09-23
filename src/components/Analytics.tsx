@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { resolveOutbound } from "@/lib/outbound";
+import { visitOrigin, type VisitOrigin } from "@/lib/visit-origin";
 import { describeClick } from "@/lib/click-target";
 
 /**
@@ -23,12 +24,17 @@ export default function Analytics() {
   // Last path sent. Without it the same page counts twice: StrictMode runs the
   // effect a second time in development, and any remount would repeat it.
   const lastPath = useRef<string | null>(null);
+  // The first page view of this load is the landing: only it carries the
+  // source. Later client-side navigations keep the same document.referrer.
+  const landed = useRef(false);
 
   useEffect(() => {
     if (!pathname || lastPath.current === pathname) return;
     lastPath.current = pathname;
 
-    void send({ type: "page_view", path: pathname });
+    const origin = landed.current ? {} : visitOrigin();
+    landed.current = true;
+    void send({ type: "page_view", path: pathname, ...origin });
   }, [pathname]);
 
   useEffect(() => {
@@ -65,7 +71,7 @@ export default function Analytics() {
   return null;
 }
 
-interface TrackedEvent {
+interface TrackedEvent extends VisitOrigin {
   type: "page_view" | "site_click" | "click";
   path: string;
   section?: string;
