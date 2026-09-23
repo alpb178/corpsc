@@ -3,10 +3,12 @@
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { resolveOutbound } from "@/lib/outbound";
+import { describeClick } from "@/lib/click-target";
 
 /**
- * The site's own analytics: one page view per route, one event per click that
- * leaves for a sibling site.
+ * The site's own analytics: one page view per route, and one event per click
+ * on a link or button, saying where on the page it happened. Clicks that leave
+ * for a sibling site go as `site_click`, with their destination.
  *
  * Both go to `/api/hub-track`, which is what talks to the hub — the key stays on
  * the server. Everything here is best-effort: if it fails, nothing about the
@@ -32,20 +34,22 @@ export default function Analytics() {
   useEffect(() => {
     function onClick(event: MouseEvent) {
       // Modified clicks open a tab without leaving the page; they are still
-      // the reader going to that site.
-      const anchor = (event.target as Element | null)?.closest?.("a[href]");
-      if (!(anchor instanceof HTMLAnchorElement)) return;
+      // the reader going to that site. The portfolio has no private area.
+      const click = describeClick(event.target, false);
+      if (!click) return;
 
-      const target = resolveOutbound(anchor.href, window.location.host);
-      if (!target) return;
+      const { section, label } = click;
+      const path = pathname ?? "/";
+      const anchor = click.element.closest("a[href]");
+      const target =
+        anchor instanceof HTMLAnchorElement
+          ? resolveOutbound(anchor.href, window.location.host)
+          : null;
 
       send(
-        {
-          type: "site_click",
-          path: pathname ?? "/",
-          target: target.slug,
-          linkType: target.linkType,
-        },
+        target
+          ? { type: "site_click", path, section, label, target: target.slug, linkType: target.linkType }
+          : { type: "click", path, section, label },
         // The page may be unloading a millisecond later: a normal fetch would
         // be cancelled, sendBeacon is handed to the browser and survives.
         true,
@@ -62,8 +66,10 @@ export default function Analytics() {
 }
 
 interface TrackedEvent {
-  type: "page_view" | "site_click";
+  type: "page_view" | "site_click" | "click";
   path: string;
+  section?: string;
+  label?: string;
   target?: string;
   linkType?: "web" | "android" | "ios";
 }
