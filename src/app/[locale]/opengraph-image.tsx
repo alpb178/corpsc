@@ -1,11 +1,26 @@
 import { readFile } from "node:fs/promises";
 import { join } from "node:path";
 import { ImageResponse } from "next/og";
-import { locales } from "@/i18n/config";
+import { isLocale, locales, type Locale } from "@/i18n/config";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = "CORPSC — Software Development Studio";
+
+const copy: Record<Locale, { title: string; tagline: string }> = {
+  es: {
+    title: "Desarrollamos software a medida, de extremo a extremo.",
+    tagline: "Web · Móvil · APIs · Ingeniería full-stack",
+  },
+  en: {
+    title: "We build custom software, end-to-end.",
+    tagline: "Web · Mobile · APIs · Full-stack engineering",
+  },
+  pt: {
+    title: "Desenvolvemos software sob medida, de ponta a ponta.",
+    tagline: "Web · Mobile · APIs · Engenharia full-stack",
+  },
+};
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -17,15 +32,9 @@ export default async function OpengraphImage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const en = locale === "en";
   const mark = await readFile(join(process.cwd(), "public/images/logo-mark.jpg"));
   const markSrc = `data:image/jpeg;base64,${mark.toString("base64")}`;
-  const title = en
-    ? "We build custom software, end-to-end."
-    : "Desarrollamos software a medida, de extremo a extremo.";
-  const tagline = en
-    ? "Web · Mobile · APIs · Full-stack engineering"
-    : "Web · Móvil · APIs · Ingeniería full-stack";
+  const { title, tagline } = copy[isLocale(locale) ? locale : "es"];
 
   return new ImageResponse(
     (

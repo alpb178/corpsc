@@ -303,6 +303,34 @@ body {
     color: #eef2f9;
   }
 
+  /* The group's shared language menu. The button sits on the navy header in
+     both themes; the dropdown follows the page theme. */
+  .lang-menu {
+    display: inline-flex;
+    --lang-fg: rgba(255, 255, 255, 0.85);
+    --lang-bg: transparent;
+    --lang-border: rgba(255, 255, 255, 0.2);
+    --lang-menu-border: var(--line);
+    --lang-menu-bg: var(--card);
+    --lang-menu-fg: var(--fg);
+    --lang-accent: var(--accent);
+    --lang-hover: var(--accent-soft);
+  }
+
+  .lang-menu > div > button {
+    height: 2.25rem;
+    transition: color 150ms ease, border-color 150ms ease;
+  }
+
+  .lang-menu > div > button:hover {
+    --lang-fg: #ffffff;
+    --lang-border: rgba(255, 255, 255, 0.4);
+  }
+
+  .dark .lang-menu {
+    --lang-menu-bg: var(--elevated);
+  }
+
   /* A rule above a section heading, carrying the accent. */
   .heading-rule::before {
     content: "";

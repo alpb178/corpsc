@@ -17,6 +17,7 @@ const dict: Dictionary = {
     menu: "Menú",
     skip: "Saltar al contenido",
     theme: { light: "Cambiar a modo claro", dark: "Cambiar a modo oscuro" },
+    language: "Idioma",
   },
   hero: {
     eyebrow: "Estudio de desarrollo de software",
