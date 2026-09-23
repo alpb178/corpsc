@@ -309,7 +309,8 @@ body {
     display: inline-flex;
     --lang-fg: rgba(255, 255, 255, 0.85);
     --lang-bg: transparent;
-    --lang-border: rgba(127, 176, 255, 0.28);
+    --lang-border: rgba(255, 255, 255, 0.2);
+    --lang-menu-border: var(--line);
     --lang-menu-bg: var(--card);
     --lang-menu-fg: var(--fg);
     --lang-accent: var(--accent);

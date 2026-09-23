@@ -12,7 +12,8 @@
  * - Colours come from CSS variables with neutral fallbacks, so it takes each
  *   brand's palette without depending on that site's Tailwind config:
  *     button: --lang-fg, --lang-bg, --lang-border
- *     menu:   --lang-menu-bg, --lang-menu-fg, --lang-accent (current), --lang-hover
+ *     menu:   --lang-menu-bg, --lang-menu-fg, --lang-menu-border,
+ *             --lang-accent (current item and focus ring), --lang-hover
  * - Keyboard: Enter/Space/ArrowDown open it, arrows move, Escape closes and
  *   returns focus to the button, Tab leaves it.
  */
@@ -118,12 +119,15 @@ export function LanguageSwitcher({
     return () => document.removeEventListener("pointerdown", onPointer);
   }, [open]);
 
-  // On open, focus the current language so arrows start from there.
+  // On open, focus the current language so arrows start from there. It is
+  // found through the DOM and the effect depends on `open` alone: a site that
+  // rebuilds `options` on every render must not yank focus back to the current
+  // language while the visitor is moving through the list.
   useEffect(() => {
     if (!open) return;
-    const index = Math.max(options.findIndex((o) => o.code === current), 0);
-    itemsRef.current[index]?.focus();
-  }, [open, options, current]);
+    const items = itemsRef.current;
+    (items.find((node) => node?.getAttribute("aria-current") === "true") ?? items[0])?.focus();
+  }, [open]);
 
   const close = (returnFocus: boolean) => {
     setOpen(false);
@@ -205,7 +209,7 @@ export function LanguageSwitcher({
           padding: 6,
           listStyle: "none",
           borderRadius: 10,
-          border: "1px solid var(--lang-border, rgba(0, 0, 0, 0.12))",
+          border: "1px solid var(--lang-menu-border, rgba(0, 0, 0, 0.12))",
           background: "var(--lang-menu-bg, #ffffff)",
           boxShadow: "0 10px 30px rgba(0, 0, 0, 0.12)",
         }}
@@ -251,7 +255,7 @@ export function LanguageSwitcher({
       </ul>
 
       {/* Hover and keyboard focus for the items, without a stylesheet per site. */}
-      <style>{`.lang-switcher-item:hover,.lang-switcher-item:focus-visible{background:var(--lang-hover,rgba(0,0,0,.05));outline:none}`}</style>
+      <style>{`.lang-switcher-item:hover,.lang-switcher-item:focus-visible{background:var(--lang-hover,rgba(0,0,0,.05))}.lang-switcher-item:focus-visible{outline:2px solid var(--lang-accent,currentColor);outline-offset:-2px}`}</style>
     </div>
   );
 }
