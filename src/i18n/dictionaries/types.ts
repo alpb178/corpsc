@@ -11,6 +11,8 @@ export interface Dictionary {
     menu: string;
     skip: string;
     theme: { light: string; dark: string };
+    /** Accessible name of the language menu. */
+    language: string;
   };
   hero: {
     eyebrow: string;

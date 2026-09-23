@@ -1,4 +1,5 @@
 import { projects } from "./projects";
+import type { Locale } from "@/i18n/config";
 
 // Sibling sites promoted in the top ticker, in the order they scroll. Only the
 // dot colour lives here — it is each brand's own, and nothing else in the
@@ -16,7 +17,7 @@ export interface GroupSite {
   name: string;
   url: string;
   color: string;
-  category: { es: string; en: string };
+  category: Record<Locale, string>;
 }
 
 export const groupSites: GroupSite[] = TICKER.flatMap(({ slug, color }) => {

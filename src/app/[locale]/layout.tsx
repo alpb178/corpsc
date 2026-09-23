@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Inter } from "next/font/google";
 import { notFound } from "next/navigation";
-import { isLocale, locales } from "@/i18n/config";
+import { isLocale, localeAlternates, localeTags, locales, ogLocales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { ThemeProvider, themeBootstrapScript } from "@/components/ThemeProvider";
 import GroupTicker from "@/components/GroupTicker";
@@ -37,18 +37,15 @@ export async function generateMetadata({
     description: dict.meta.description,
     alternates: {
       canonical: `/${locale}`,
-      languages: {
-        es: "/es",
-        en: "/en",
-        "x-default": "/es",
-      },
+      languages: localeAlternates(),
     },
     openGraph: {
       title: dict.meta.title,
       description: dict.meta.description,
       type: "website",
       url: `https://www.corpsc.com/${locale}`,
-      locale: locale === "es" ? "es_BO" : "en_US",
+      locale: ogLocales[locale],
+      alternateLocale: locales.filter((l) => l !== locale).map((l) => ogLocales[l]),
       siteName: "CORPSC",
     },
     twitter: {
@@ -82,7 +79,7 @@ export default async function LocaleLayout({
     telephone: "+59173655692",
     serviceType: "Custom software development",
     areaServed: ["BO", "Latin America", "Europe"],
-    knowsLanguage: ["es", "en"],
+    knowsLanguage: locales.map((l) => localeTags[l]),
     founder: {
       "@type": "Person",
       name: "Alejandro Pérez",
@@ -98,7 +95,7 @@ export default async function LocaleLayout({
 
   return (
     <html
-      lang={locale}
+      lang={localeTags[locale]}
       className={`${inter.variable} ${archivo.variable}`}
       data-scroll-behavior="smooth"
       suppressHydrationWarning
