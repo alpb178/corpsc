@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/get-dictionary";
-import LanguageToggle from "./LanguageToggle";
+import LanguageMenu from "./LanguageMenu";
 import Logo from "./Logo";
 import MobileMenu from "./MobileMenu";
 import ThemeToggle from "./ThemeToggle";
@@ -34,7 +34,7 @@ export default function Navbar({ locale, dict }: { locale: Locale; dict: Dict })
 
         <div className="flex items-center gap-2">
           <ThemeToggle label={dict.nav.theme} />
-          <LanguageToggle current={locale} />
+          <LanguageMenu current={locale} label={dict.nav.language} />
           {/* Wrapper, not `hidden` on the Link: `.btn` sets display and would
               win the specificity tie against the utility. */}
           <div className="hidden lg:block">
