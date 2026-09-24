@@ -5,7 +5,8 @@ import { isLocale, localeAlternates, localeTags, locales, ogLocales } from "@/i1
 import { getDictionary } from "@/i18n/get-dictionary";
 import { ThemeProvider, themeBootstrapScript } from "@/components/ThemeProvider";
 import GroupTicker from "@/components/GroupTicker";
-import Analytics from "@/components/Analytics";
+import { HubAnalytics } from "@/lib/hub-tracker/HubAnalytics";
+import { GROUP_SITES, STORE_LINKS } from "@/lib/outbound";
 import "../globals.css";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
@@ -112,9 +113,10 @@ export default async function LocaleLayout({
           <GroupTicker dict={dict} locale={locale} />
           {children}
         </ThemeProvider>
-        {/* Renders nothing: counts the visit and the clicks that leave for a
-            sibling site, and sends them to the group's hub. */}
-        <Analytics />
+        {/* Renders nothing: counts the visit and the clicks, including the ones
+            that leave for a sibling site, and sends them to the group's hub.
+            The path is counted without its locale: /es and /en are one page. */}
+        <HubAnalytics locales={locales} groupSites={GROUP_SITES} storeLinks={STORE_LINKS} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
